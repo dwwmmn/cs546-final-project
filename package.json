@@ -1,0 +1,25 @@
+{
+  "name": "cs546-final-project",
+  "version": "1.0.0",
+  "description": "CS546 Web Development - Final Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dwwmmn/cs546-final-project.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dwwmmn/cs546-final-project/issues"
+  },
+  "homepage": "https://github.com/dwwmmn/cs546-final-project#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "passport": "^0.4.0",
+    "uuid": "^3.1.0"
+  }
+}
