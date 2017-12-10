@@ -1,4 +1,4 @@
-const collections = require("../db");
+const collections = require("../db/mongoSetup.js");
 
 const exampleUsers = [
     {
@@ -107,21 +107,21 @@ const exampleCards = [
         decks = await collections.decks();
 
     /* Clear collection */
-    users.remove( {} );
-    cards.remove( {} );
-    decks.remove( {} );
+    await users.remove( {} );
+    await cards.remove( {} );
+    await decks.remove( {} );
 
-    var result = users.insertMany(exampleUsers);
+    var result = await users.insertMany(exampleUsers);
     if (result.insertedIds.length != exampleUsers.length) {
         console.log("DB insertion for users failed");
     }
 
-    result = cards.insertMany(exampleCards);
+    result = await cards.insertMany(exampleCards);
     if (result.insertedIds.length != exampleCards.length) {
         console.log("DB insertion failed for cards");
     }
     
-    result = decks.insertMany(exampleDecks);
+    result = await decks.insertMany(exampleDecks);
     if (result.insertedIds.length != exampleDecks.length) { 
         console.log("DB insertion failed for decks"); 
     } 
