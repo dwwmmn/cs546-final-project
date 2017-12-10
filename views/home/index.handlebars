@@ -1,0 +1,10 @@
+<section id="top_decks">
+    <ol>
+        {{#each decks}}
+        <li>
+            <a href="/deck/{{_id}}">{{name}}</a>
+            <p>{{description}}</p>
+        </li>
+        {{/each}}
+    </ol>
+</section>
