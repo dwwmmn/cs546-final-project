@@ -1,12 +1,16 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 
 router.get("/", (req, res) => {
-    res.render("login/index");
+    let msg = req.flash('error')[0];
+    res.render("login/index", {message: msg});
 });
 
-router.post("/", (req, resp) => {
+router.post("/", passport('mongo', {failureRedirect: '/login', failureFlash: true}),
+    (req, res) => {
     // TODO
+    res.redirect("/");
 });
 
 module.exports = router;
