@@ -45,3 +45,4 @@ let setupLocalStrategy = (passport) => {
     });
 };
 
+module.exports.setupLocalStrategy = setupLocalStrategy;

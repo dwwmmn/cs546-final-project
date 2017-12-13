@@ -2,7 +2,7 @@ const mongoClient = require("mongodb").MongoClient;
 const settings = require("./mongoConfig.js");
 const mongoConfig = settings.mongoConfig;
 
-let mongoURL = `${mongoConfig.serverUrl}${mongoConfig.database}`;
+let mongoURL = `${mongoConfig.serverURL}${mongoConfig.database}`;
 console.log(mongoURL);
 let _connection = undefined;
 let _collections = undefined;

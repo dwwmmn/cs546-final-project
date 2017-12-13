@@ -1,7 +1,7 @@
 const uuid = require("uuid/v4");
 const collections = require("./mongoSetup.js");
 
-let getTopDecks = async (id, info) => {
+let getTopDecks = async () => {
     let decks = await collections.decks();
 
     // TODO get top 10 decks by upvotes
@@ -86,6 +86,7 @@ let removeCard = async (deckId, cardId) => {
 }
 
 module.exports = {
+    getTopDecks: getTopDecks,
     updateDeck: updateDeck,
     addDeck: addDeck,
     deleteDeck: deleteDeck,
