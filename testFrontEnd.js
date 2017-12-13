@@ -25,23 +25,27 @@ app.engine("handlebars", handlebarsInstance.engine);
 app.set("view engine", "handlebars");
 
 // Test Params
-const userName = 'me';
+const userName = 'Drew the Destroyer';
 const decks = [
     {_id: '1', name: 'Deck 1', description: 'The best'},
     {_id: '2', name: 'Deck 2', description: 'The second best'}   
 ];
+const pageNumber = '5';
 
 // Test HomePage - Logged In
-app.get("/home_logged_in", (req, res) => {
+app.get("/", (req, res) => {
     res.render('home/index', {userName: userName, decks: decks});
 });
 
 // Test HomePage - Not Logged In
-app.get("/home_not_logged_in", (req, res) => {
+app.get("/", (req, res) => {
     res.render('home/index', {decks: decks});
 }); 
 
-// 
+// Test Decks Page - Logged In, Some Decks
+app.get("/decks/", (req, res) => {
+    res.render('decks/index', {userName: userName, decks: decks, pageNumber: pageNumber});
+});
 
 app.listen(3000, () => {
     console.log("We've now got a server!");
