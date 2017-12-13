@@ -47,6 +47,11 @@ app.get("/decks/", (req, res) => {
     res.render('decks/index', {userName: userName, decks: decks, pageNumber: pageNumber});
 });
 
+// Test Log In Page
+app.get("/login/", (req, res) => {
+    res.render('login/index', {});
+});
+
 app.listen(3000, () => {
     console.log("We've now got a server!");
     console.log("Your routes will be running on http://localhost:3000");
