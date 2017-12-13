@@ -26,6 +26,13 @@ app.set("view engine", "handlebars");
 
 // Test Params
 const userName = 'Drew the Destroyer';
+const user = {
+    "id": 0,
+    "username": "Drew the Destroyer",
+    "fullname": "Drew M",
+    "about": "a boy",
+    "email": "drew@stevens.edu"    
+};
 const decks = [
     {_id: '1', name: 'Deck 1', description: 'The best'},
     {_id: '2', name: 'Deck 2', description: 'The second best'}   
@@ -50,6 +57,11 @@ app.get("/decks/", (req, res) => {
 // Test Log In Page
 app.get("/login/", (req, res) => {
     res.render('login/index', {});
+});
+
+// Test Account Page
+app.get("/account/", (req, res) => {
+    res.render('account/index', {userName: userName, user: user});
 });
 
 app.listen(3000, () => {
