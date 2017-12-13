@@ -2,8 +2,8 @@
     <ol>
         {{#each decks}}
         <li>
-            <a href="/deck/{{_id}}">{{name}}</a>
-            <p>{{description}}</p>
+            <a href="/deck/{{this._id}}">{{this.name}}</a>
+            <p>{{this.description}}</p>
         </li>
         {{/each}}
     </ol>
