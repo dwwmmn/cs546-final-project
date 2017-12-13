@@ -1,9 +1,10 @@
 const uuid = require("uuid/v4");
 const collections = require("./mongoSetup.js");
 
-let getTopTenDecks = async () => {
-    let decks = await collecions.decks();
-    // TODO
+let getTopDecks = async (id, info) => {
+    let decks = await collections.decks();
+
+    // TODO get top 10 decks by upvotes
 }
 
 let updateDeck = async (id, info) => {
