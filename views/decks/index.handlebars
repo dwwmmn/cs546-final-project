@@ -1,8 +1,8 @@
 <section id="search_form">
     <form id="search">
-        <legend>Search for Cards</legend>
+        <legend>Search for Decks</legend>
         <p>
-            <label for="name">CardName</label>
+            <label for="name">Deck Name: </label>
             <input name="name" id="name" value="{{searchName}}"></input>
 
             <!-- TODO -->
@@ -15,7 +15,7 @@
         {{#each decks}}
             <li>
                 <article class="deck">
-                    <a href="/deck/{{this._id}}">{{this.name}}</a>
+                    <a href="/decks/{{this._id}}">{{this.name}}</a>
                     <p>{{this.description}}</p>
                 </article>
             </li>

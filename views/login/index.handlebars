@@ -8,6 +8,9 @@
             <input id="passwordField" name="password" type="password" />
             <input type="Submit" />
         </form>
+        {{#if message}}
+        <span id="error">{{message}}</span>
+        {{/if}}
     </article>
     <article>
         <h2>Sign Up</h2>

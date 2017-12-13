@@ -37,6 +37,11 @@ const decks = [
     {_id: '1', name: 'Deck 1', description: 'The best'},
     {_id: '2', name: 'Deck 2', description: 'The second best'}   
 ];
+const cards = [
+    {_id: '1', name: 'Mongod', effect: 'Kill Yourself'},
+    {_id: '2', name: 'Matthew Crepea', effect: 'Write all of the handlebars'}
+]
+
 const pageNumber = '5';
 
 // Test HomePage - Logged In
@@ -63,6 +68,10 @@ app.get("/login/", (req, res) => {
 app.get("/account/", (req, res) => {
     res.render('account/index', {userName: userName, user: user});
 });
+
+app.get("/cards/", (req, res) => {
+    res.render('cards/index', {userName: userName, cards: cards})
+})
 
 app.listen(3000, () => {
     console.log("We've now got a server!");
