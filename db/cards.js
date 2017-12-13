@@ -25,6 +25,12 @@ let getCard = async () => {
     // TODO
 }
 
+let getCards = async () => {
+    let cards = await collections.cards();
+
+    // TODO
+}
+
 module.exports = {
     updateCard: updateCard,
     addCard: addCard,

@@ -11,6 +11,7 @@ const homeRoutes = require("./home.js");
 const loginRoutes = require("./login.js");
 const searchRoutes = require("./search.js");
 const cardRoutes = require("./card.js");
+const signupRoutes = require("./signup.js");
 
 const strategy = require("./localStrategy.js");
 
@@ -34,6 +35,7 @@ module.exports = (app) => {
     app.use("/account", accountRoutes);
     app.use("/", homeRoutes);
     app.use("/login", loginRoutes);
+    app.use("/signup", signupRoutes);
     app.use("/search", searchRoutes);
-    app.use("/card", cardRoutes);
+    app.use("/cards", cardRoutes);
 };

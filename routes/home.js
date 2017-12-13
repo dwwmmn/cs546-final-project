@@ -19,10 +19,12 @@ router.get("/", async(req, res) => {
             results["userName"] = user.userName;
 
         }
+        
+        results["userName"] = "Keyur";
+        results["decks"] = [ { "_id": "1", "name": "Deck 1", "description": "Whale nipples" }, { "_id": "2", "name": "Deck 2", "description": "Praying mantis nipples?"} ]
 
         res.render("home/index", results);
     } catch (err) {
-        console.log(err);
         res.status(404).json({message: "Something went wrong"});
     }
 });
