@@ -15,7 +15,7 @@
         {{#each decks}}
             <li>
                 <article class="deck">
-                    <p id="rating">{{rating}}</p>
+                    <p id="rating">Rating: {{this.rating}}</p>
                     <a href="/decks/{{this._id}}">{{this.name}}</a>
                     <p>{{this.description}}</p>
                 </article>
