@@ -10,6 +10,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", async(req, res) => {
+   // await users.clearAll();
     let user = {};
 
     if (req.body) {
@@ -19,14 +20,21 @@ router.post("/", async(req, res) => {
         user["email"] = req.body.email;
         user["password"] = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 
-        let result = await users.addUser(user);
+        try {
+            let result = await users.addUser(user);
+            console.log(result);
 
-        if (result) {
-            res.redirect("/login");
-        } else {
-            req.flash('error', 'Error signing up');
-            res.redirect("/");
+            if (result) {
+                req.flash('error', 'Signed up successfully, log in with your id')
+                res.redirect("/login");
+            }
+        } catch (err) {
+            console.log(err);
+            req.flash('error', err);
+            res.redirect("/signup");
         }
+
+
     } else {
         req.flash('error', 'Error signing up');
         res.redirect("/");

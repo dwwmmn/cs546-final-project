@@ -2,6 +2,7 @@
 const LocalStrategy = require("passport-mongodb").Strategy;
 const bcrypt = require("bcryptjs");
 const withDB = require("../db/mongoSyncSetup.js");
+const DEBUG =true;
 
 let setupLocalStrategy = (passport) => {
     passport.use(new LocalStrategy({
@@ -31,7 +32,7 @@ let setupLocalStrategy = (passport) => {
             });
         })
     );
-        
+
     passport.serializeUser((user, callback) => {
         callback(null, user.id);
     });

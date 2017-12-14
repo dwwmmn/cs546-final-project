@@ -9,56 +9,46 @@ const exampleUsers = [
         _id: "e5b01459-2b9b-421d-a69e-58a30ab73043",
         sessionId: null,
         hashedPassword: "$2a$04$I2KEhVRFyOc7.MKSjtRKkenzI5dEcGk4dOOYhRVHQZSl3Yatcribi",
-        profile: {
             username: "User1",
             fullname: "John Smith",
             about: "An example user profile.",
             email: "user1@example.com"
-        }
     },
     {
         _id: "121a31d0-4212-4fd6-979d-5fe38372e90d",
         sessionId: null,
         hashedPassword: "$2a$04$I2KEhVRFyOc7.MKSjtRKkenzI5dEcGk4dOOYhRVHQZSl3Yatcribi",
-        profile: {
             username: "User2",
             fullname: "John Smith",
             about: "An example user profile.",
             email: "user2@example.com"
-        }
     },
     {
         _id: "742eff97-9601-43d0-a0cb-348d926ded62",
         sessionId: null,
         hashedPassword: "$2a$04$I2KEhVRFyOc7.MKSjtRKkenzI5dEcGk4dOOYhRVHQZSl3Yatcribi",
-        profile: {
             username: "User3",
             fullname: "John Smith",
             about: "An example user profile.",
             email: "user3@example.com"
-        }
     },
     {
         _id: "8f9f340c-05f1-4ce8-9239-3dcf7816df79",
         sessionId: null,
         hashedPassword: "$2a$04$I2KEhVRFyOc7.MKSjtRKkenzI5dEcGk4dOOYhRVHQZSl3Yatcribi",
-        profile: {
             username: "User4",
             fullname: "John Smith",
             about: "An example user profile.",
             email: "user4@example.com"
-        }
     },
     {
         _id: "3fdf870d-19d3-496c-8f9b-3ce3f7f662f6",
         sessionId: null,
         hashedPassword: "$2a$04$I2KEhVRFyOc7.MKSjtRKkenzI5dEcGk4dOOYhRVHQZSl3Yatcribi",
-        profile: {
             username: "User5",
             fullname: "John Smith",
             about: "An example user profile.",
             email: "user5@example.com"
-        }
     }
 ]
 

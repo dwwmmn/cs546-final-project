@@ -14,17 +14,18 @@ router.get("/", async(req, res) => {
         results["decks"] = deckList;
 
         if (req.user) {
-            let id = req.user._id;
+            let id = req.user._id;  
             let user = await users.getUser(id);
-            results["userName"] = user.userName;
+            results["username"] = user.username;
 
         }
         
-        results["userName"] = "Keyur";
+/*         results["username"] = "Keyur";
         results["decks"] = [ { "_id": "1", "name": "Deck 1", "description": "Whale nipples" }, { "_id": "2", "name": "Deck 2", "description": "Praying mantis nipples?"} ]
-
+ */
         res.render("home/index", results);
     } catch (err) {
+        console.log(err);
         res.status(404).json({message: "Something went wrong"});
     }
 });

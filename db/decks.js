@@ -4,9 +4,11 @@ const deckCollection = collections.decks;
 
 
 let getDecks = async () => {
-    let decks = await collections.decks();
+    let deckC = await deckCollection();
 
-    // TODO get all decks
+    let decks = await deckC.find({}).toArray();
+
+    return decks;
 }
 
 let getTopDecks = async (id, info) => {
