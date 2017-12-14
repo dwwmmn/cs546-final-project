@@ -13,6 +13,7 @@ const createAuthdRoute = require("./login.js");
 const cardRoutes = require("./cards.js");
 const deckRoutes = require("./decks.js");
 const signupRoutes = require("./signup.js");
+const logoutRoutes = require("./logout.js");
 
 const setupLocalStrategy = require("./localStrategy.js");
 const exphbs = require("express-handlebars");
@@ -61,4 +62,5 @@ module.exports = (app) => {
     app.use("/signup", signupRoutes);
     app.use("/cards", cardRoutes);
     app.use("/decks", deckRoutes);
+    app.use("/logout", logoutRoutes);
 };

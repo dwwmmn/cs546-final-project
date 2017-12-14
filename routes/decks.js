@@ -78,7 +78,7 @@ router.post("/next", async(req, res) => {
     try {
         let results = {};
         let deckList = await (req.body.search? decks.getDecksByName(req.body.search): decks.getDecks());
-        let pageNum = Math.max(1, Math.min(req.body.pageNumber + 1, deckList.length/10));
+        let pageNum = Math.max(1, Math.min(req.body.pageNumber + 1, Math.ceil(deckList.length/10)));
 
         results["decks"] = deckList.slice((pageNum - 1)*10 , (pageNum)*10);
         results["pageNumber"] = pageNum;
@@ -103,7 +103,7 @@ router.post("/prev", async(req, res) => {
     try {
         let results = {};
         let deckList = await (req.body.search? decks.getDecksByName(req.body.search): decks.getDecks());
-        let pageNum = Math.max(1, Math.min(req.body.pageNumber - 1, deckList.length/10));
+        let pageNum = Math.max(1, Math.min(req.body.pageNumber - 1, Math.ceil(deckList.length/10)));
 
         results["decks"] = deckList.slice((pageNum - 1)*10 , (pageNum)*10);
         results["pageNumber"] = pageNum;
@@ -128,7 +128,7 @@ router.post("/goto", async(req, res) => {
     try {
         let results = {};
         let deckList = await (req.body.search? decks.getDecksByName(req.body.search): decks.getDecks());
-        let pageNum = Math.max(1, Math.min(req.body.pageNumber, deckList.length/10));
+        let pageNum = Math.max(1, Math.min(req.body.pageNumber, Math.ceil(deckList.length/10)));
 
         results["decks"] = deckList.slice((pageNum - 1)*10 , (pageNum)*10);
         results["pageNumber"] = pageNum;
