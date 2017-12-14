@@ -24,8 +24,8 @@
     {{#if userName}}
     <div id="votes">
         <form id="voteForm" method="POST">
-            <input type="submit" name="action" value="Upvote" />
-            <input type="submit" name="action" value="Downvote" />
+            <input type="submit" name="action" formaction="/decks/upvote" value="Upvote" />
+            <input type="submit" name="action" formaction="/decks/downvote" value="Downvote" />
         </form>
     </div>
     {{/if}}
