@@ -1,6 +1,10 @@
 const uuid = require("uuid/v4");
 const collections = require("./mongoSetup.js");
 
+let clearAll = async () => {
+    await collections.users().remove( {} );
+};
+
 let updateUser = async (id, info) => {
     let users = await collections.users();
 
