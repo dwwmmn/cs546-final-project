@@ -13,7 +13,7 @@ router.get("/", async(req, res) => {
 
         if (req.user) {
             let user = await users.getUser(req.user._id);
-            results["userName"] = user.userName;
+            results["username"] = user.username;
         }
 
         res.render("decks/index", results);
@@ -32,10 +32,30 @@ router.get("/:userId", async(req, res) => {
 
         if (req.user) {
             let user = await users.getUser(req.user._id);
-            results["userName"] = user.userName;
+            results["username"] = user.username;
         }
 
         res.render("decks/index", results);
+    } catch (err) {
+        res.status(404).json({message: "Something went wrong"});
+    }
+});
+
+
+router.get("/:deckId", async(req, res) => {
+
+    try {
+        let results = {};
+        let deck = await decks.getDeck(req.params.deckId);
+
+        results.deck = deck;
+
+        if (req.user) {
+            let user = await users.getUser(req.user._id);
+            results["username"] = user.username;
+        }
+
+        res.render("decks/instance", results);
     } catch (err) {
         res.status(404).json({message: "Something went wrong"});
     }
