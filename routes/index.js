@@ -26,7 +26,7 @@ module.exports = (app) => {
         // cookie: { secure: true }
     }));
 
-    setupLocalStrategy(passport);
+    setupLocalStrategy(passport); // Needs to come before passport.initialize()
 
     app.use(passport.initialize());
     app.use(passport.session());

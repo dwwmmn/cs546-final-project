@@ -7,11 +7,12 @@ module.exports = (passport) => {
         res.render("login/index", {message: msg});
     });
     
-    router.post("/", passport.authenticate('mongodb', {failureRedirect: '/login', failureFlash: true}),
+    router.post("/",
+        passport.authenticate('login-strategy', { failureRedirect: '/login', failureFlash: true }),
         (req, res) => {
-        // TODO
-        res.redirect("/");
-    });
+            res.redirect("/");
+        }
+    );
 
     return router;
 }
