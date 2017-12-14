@@ -71,6 +71,10 @@ app.get("/account/", (req, res) => {
 
 app.get("/cards/", (req, res) => {
     res.render('cards/index', {userName: userName, cards: cards})
+});
+
+app.get("/signup/", (req, res) => {
+    res.render('signup/index', {})
 })
 
 app.listen(3000, () => {
