@@ -25,9 +25,16 @@ let clearAll = async () => {
 };
 
 let updateDeck = async (id, info) => {
-    let decks = await deckCollection();
+    let deckC = await deckCollection();
 
-    // TODO
+    let result = await deckC.findOneAndUpdate({ _id: id}, { $set: info }, { returnOriginal: false });
+
+    if (!result) throw "Deck with id " + id + " was not updated";
+    
+    let ret = await getDeck(id);
+    
+    return ret;
+
 }
 
 let addDeck = async (deckInfo) => {
