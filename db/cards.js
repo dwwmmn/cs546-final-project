@@ -35,5 +35,6 @@ module.exports = {
     updateCard: updateCard,
     addCard: addCard,
     deleteCard: deleteCard,
-    getCard: getCard
+    getCard: getCard,
+    getCards: getCards
 }

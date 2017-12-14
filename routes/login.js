@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
     res.render("login/index", {message: msg});
 });
 
-router.post("/", passport('mongo', {failureRedirect: '/login', failureFlash: true}),
+router.post("/", passport.authenticate('mongo', {failureRedirect: '/login', failureFlash: true}),
     (req, res) => {
     // TODO
     res.redirect("/");

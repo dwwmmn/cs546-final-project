@@ -1,6 +1,11 @@
 const uuid = require("uuid/v4");
 const collections = require("./mongoSetup.js");
 
+let getDecks = async () => {
+    let decks = await collections.decks();
+
+    // TODO get all decks
+}
 let getTopDecks = async () => {
     let decks = await collections.decks();
 
@@ -86,6 +91,7 @@ let removeCard = async (deckId, cardId) => {
 }
 
 module.exports = {
+    getDecks: getDecks,
     getTopDecks: getTopDecks,
     updateDeck: updateDeck,
     addDeck: addDeck,
