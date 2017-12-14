@@ -1,4 +1,8 @@
-const collections = require("../db/mongoSetup.js");
+/**
+ * Test database code and fill db with example values.
+ */
+
+const collections = require("../db");
 
 const exampleUsers = [
     {
@@ -177,27 +181,26 @@ const exampleDecks = [
 ];
 
 (async () => {
-    let users = await collections.users(),
-        cards = await collections.cards(),
-        decks = await collections.decks();
+    let users = collections.userData,
+        cards = collections.cardData,
+        decks = collections.deckData;
 
     /* Clear collection */
-    await users.remove( {} );
-    await cards.remove( {} );
-    await decks.remove( {} );
+    await users.clearAll();
+    await cards.clearAll();
+    await decks.clearAll();
 
-    var result = await users.insertMany(exampleUsers);
-    if (result.insertedIds.length != exampleUsers.length) {
-        console.log("DB insertion for users failed");
+    /* Fill values */
+    for (let i = 0; i < exampleUsers.length; i++) {
+        await users.addCard(exampleUsers[i]);
     }
 
-    result = await cards.insertMany(exampleCards);
-    if (result.insertedIds.length != exampleCards.length) {
-        console.log("DB insertion failed for cards");
+    for (let i = 0; i < exampleDecks.length; i++) {
+        await decks.addDeck(exampleDecks[i]);
     }
-    
-    result = await decks.insertMany(exampleDecks);
-    if (result.insertedIds.length != exampleDecks.length) { 
-        console.log("DB insertion failed for decks"); 
-    } 
+
+    for (let i = 0; i < exampleCards.length; i++) {
+        await card.addCard(exampleCards[i]);
+    }
+
 })();
