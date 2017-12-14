@@ -35,6 +35,7 @@ module.exports = (app) => {
     app.set('view engine', 'handlebars');
     /* Tell router to populate req.body */
     app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
     app.use(flash());    
     app.use(session({
         secret: "don't touch my key, government!",
