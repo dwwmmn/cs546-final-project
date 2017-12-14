@@ -167,7 +167,119 @@ const exampleDecks = [
             "18954f72-4a7f-486a-8738-cf957ae2d904",
             "56131d89-44a8-46d9-914c-af06a5ab4f58"
         ],
-    }
+    },
+    {
+        owner: "3fdf870d-19d3-496c-8f9b-3ce3f7f662f6",
+        isPublic: true,
+        name: "Example Deck 6",
+        description: "This is an example deck.",
+        upvotes: [],
+        downvotes: [],
+        cards: [
+            "6a30812d-c25b-458c-a3ff-2df67bd35d2d",
+            "c3f3aa1b-555c-4975-8c19-3a8c24b324c0",
+            "18954f72-4a7f-486a-8738-cf957ae2d904",
+            "56131d89-44a8-46d9-914c-af06a5ab4f58"
+        ],
+    },
+    {
+        owner: "3fdf870d-19d3-496c-8f9b-3ce3f7f662f6",
+        isPublic: true,
+        name: "Example Deck 7",
+        description: "This is an example deck.",
+        upvotes: [],
+        downvotes: [],
+        cards: [
+            "6a30812d-c25b-458c-a3ff-2df67bd35d2d",
+            "c3f3aa1b-555c-4975-8c19-3a8c24b324c0",
+            "18954f72-4a7f-486a-8738-cf957ae2d904",
+            "56131d89-44a8-46d9-914c-af06a5ab4f58"
+        ],
+    },
+    {
+        owner: "3fdf870d-19d3-496c-8f9b-3ce3f7f662f6",
+        isPublic: true,
+        name: "Example Deck 8",
+        description: "This is an example deck.",
+        upvotes: [],
+        downvotes: [],
+        cards: [
+            "6a30812d-c25b-458c-a3ff-2df67bd35d2d",
+            "c3f3aa1b-555c-4975-8c19-3a8c24b324c0",
+            "18954f72-4a7f-486a-8738-cf957ae2d904",
+            "56131d89-44a8-46d9-914c-af06a5ab4f58"
+        ],
+    },
+    {
+        owner: "3fdf870d-19d3-496c-8f9b-3ce3f7f662f6",
+        isPublic: true,
+        name: "Example Deck 9",
+        description: "This is an example deck.",
+        upvotes: [],
+        downvotes: [],
+        cards: [
+            "6a30812d-c25b-458c-a3ff-2df67bd35d2d",
+            "c3f3aa1b-555c-4975-8c19-3a8c24b324c0",
+            "18954f72-4a7f-486a-8738-cf957ae2d904",
+            "56131d89-44a8-46d9-914c-af06a5ab4f58"
+        ],
+    },
+    {
+        owner: "3fdf870d-19d3-496c-8f9b-3ce3f7f662f6",
+        isPublic: true,
+        name: "Example Deck 10",
+        description: "This is an example deck.",
+        upvotes: [],
+        downvotes: [],
+        cards: [
+            "6a30812d-c25b-458c-a3ff-2df67bd35d2d",
+            "c3f3aa1b-555c-4975-8c19-3a8c24b324c0",
+            "18954f72-4a7f-486a-8738-cf957ae2d904",
+            "56131d89-44a8-46d9-914c-af06a5ab4f58"
+        ],
+    },
+    {
+        owner: "3fdf870d-19d3-496c-8f9b-3ce3f7f662f6",
+        isPublic: true,
+        name: "Example Deck 11",
+        description: "This is an example deck.",
+        upvotes: [],
+        downvotes: [],
+        cards: [
+            "6a30812d-c25b-458c-a3ff-2df67bd35d2d",
+            "c3f3aa1b-555c-4975-8c19-3a8c24b324c0",
+            "18954f72-4a7f-486a-8738-cf957ae2d904",
+            "56131d89-44a8-46d9-914c-af06a5ab4f58"
+        ],
+    },
+    {
+        owner: "3fdf870d-19d3-496c-8f9b-3ce3f7f662f6",
+        isPublic: true,
+        name: "Example Deck 12",
+        description: "This is an example deck.",
+        upvotes: [],
+        downvotes: [],
+        cards: [
+            "6a30812d-c25b-458c-a3ff-2df67bd35d2d",
+            "c3f3aa1b-555c-4975-8c19-3a8c24b324c0",
+            "18954f72-4a7f-486a-8738-cf957ae2d904",
+            "56131d89-44a8-46d9-914c-af06a5ab4f58"
+        ],
+    },
+    {
+        owner: "3fdf870d-19d3-496c-8f9b-3ce3f7f662f6",
+        isPublic: true,
+        name: "Example Deck 13",
+        description: "This is an example deck.",
+        upvotes: [],
+        downvotes: [],
+        cards: [
+            "6a30812d-c25b-458c-a3ff-2df67bd35d2d",
+            "c3f3aa1b-555c-4975-8c19-3a8c24b324c0",
+            "18954f72-4a7f-486a-8738-cf957ae2d904",
+            "56131d89-44a8-46d9-914c-af06a5ab4f58"
+        ],
+    },
 ];
 
 (async () => {

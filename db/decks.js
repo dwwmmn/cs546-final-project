@@ -4,11 +4,25 @@ const deckCollection = collections.decks;
 const cardC = require("./cards.js");
 
 
+let sortFn = (a, b) => {
+    if (a.rating < b.rating) {
+        return -1;
+    }
+
+    if (a.rating > b.rating) {
+        return 1;
+    }
+
+    if (a.rating === b.rating) {
+        return a.name.localeCompare(b.name);
+    }
+}
+
 let getDecks = async () => {
     let deckC = await deckCollection();
 
     let decks = await deckC.find({}).toArray();
-    decks.sort((a, b) => { a.rating - b.rating });
+    decks.sort(sortFn);
 
     return decks;
 }
@@ -19,7 +33,7 @@ let getDecksByName = async (queryName) => {
 
     let decks = await deckC.find( { name: {$regex: queryName }}).toArray();
 
-    decks.sort((a, b) => { a.rating - b.rating });;
+    decks.sort(sortFn);
 
     return decks;
 }
@@ -27,7 +41,7 @@ let getDecksByName = async (queryName) => {
 let getTopDecks = async (id, info) => {
     let deckC = await deckCollection();
     const decks = await deckC.find({}).toArray();
-    decks.sort((a, b) => { a.rating - b.rating });
+    decks.sort(sortFn);
 
     return decks.slice(0, 9);
 }
@@ -53,9 +67,11 @@ let updateDeck = async (id, info) => {
 
 let addDeck = async (deckInfo) => {
     let decks = await deckCollection();
-    if(!deckInfo._id){
-        throw "No ID provided";
+
+    if (!deckInfo._id) {
+        deckInfo._id = uuid();
     }
+
     if(!deckInfo.owner){
         throw "No owner provided";
     }

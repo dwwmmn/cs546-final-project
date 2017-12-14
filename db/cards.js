@@ -18,9 +18,11 @@ let updateCard = async () => {
 
 let addCard = async (cardInfo) => {
     let cards = await cardCollection();
-    if(!cardInfo._id){
-        throw "No ID provided";
+
+    if (!cardInfo._id) {
+        cardInfo._id = uuid();
     }
+
     if(!cardInfo.name){
         throw "No name provided";
     }
@@ -69,6 +71,8 @@ let getCardsByName = async(queryName) => {
 
     let card = await cards.find({ name: { $regex: queryName } }).toArray();
 
+    card.sort();
+
     return card;
 }
 
@@ -76,6 +80,8 @@ let getCards = async () => {
     let cardC = await cardCollection();
     
     const cards = await cardC.find({}).toArray();
+    cards.sort();
+
     
     return cards;
 }
