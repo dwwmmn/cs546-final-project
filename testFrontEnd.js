@@ -128,13 +128,13 @@ deck_obj_2 = {
     userName: 'DrewDude'
 };
 
-decks = [
+const myDecks = [
     deck_obj,
     deck_obj_2
 ];
 
 app.get("/cards/", (req, res) => {
-    res.render('cards/index', {userName: userName, cards: cards, })
+    res.render('cards/index', {userName: userName, cards: cards, myDecks: myDecks});
 });
 
 //Test Deck Instance
