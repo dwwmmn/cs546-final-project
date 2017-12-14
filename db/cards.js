@@ -3,7 +3,11 @@ const collections = require("./mongoSetup.js");
 const cardCollection = collections.cards;
 
 let clearAll = async () => {
-    await collections.cards().remove( {} );
+    let cards = await cardCollection();
+    try { await cards.remove({}); }
+    catch (err) {
+
+    }
 };
 
 /* Implemented as an extra feature */
@@ -12,40 +16,31 @@ let updateCard = async () => {
     throw "Not implemented";
 }
 
-let addCard = async (id, name, effect, cost, power, rarity) => {
+let addCard = async (cardInfo) => {
     let cards = await cardCollection();
-    if(!id){
+    if(!cardInfo._id){
         throw "No ID provided";
     }
-    if(!name){
+    if(!cardInfo.name){
         throw "No name provided";
     }
-    if(!effect){
+    if(!cardInfo.effect){
         throw "No effect provided";
     }
-    if(!cost){
+    if(!cardInfo.cost){
         throw "No cost provided";
     }
-    if(!power){
+    if(!cardInfo.power){
         throw "No power provided";
     }
-    if(!rarity){
+    if(!cardInfo.rarity){
         throw "No rarity provided";
     }
-    let newCard = {
-        _id: id,
-        name: name,
-        effect: effect,
-        cost: cost,
-        power: power,
-        rarity: rarity
-    };
-    const insertedCard = await cards.insertOne(newCard);
+    const insertedCard = await cards.insertOne(cardInfo);
     if(insertedCard.insertedCount === 0) throw "Could not add card";
     
-    const card = await this.getCard(insertedCard.insertedId);
+    const card = await getCard(insertedCard.insertedId);
     return card;
-    
 }
 
 let deleteCard = async (id) => {
@@ -80,5 +75,6 @@ module.exports = {
     addCard: addCard,
     deleteCard: deleteCard,
     getCard: getCard,
-    getCards: getCards
+    getCards: getCards,
+    clearAll: clearAll
 }

@@ -1,6 +1,6 @@
-const deckData = require("./decks");
-const cardData = require("./cards");
-const userData = require("./users");
+const deckData = require("./decks.js");
+const cardData = require("./cards.js");
+const userData = require("./users.js");
 
 
 module.exports = {

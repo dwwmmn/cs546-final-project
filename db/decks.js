@@ -6,15 +6,15 @@ const deckCollection = collections.decks;
 
 let getTopDecks = async (id, info) => {
     let deckC = await deckCollection();
-    const decks = deckC.find({}).toArray();
-    decks.sort(function (a,b) {
-        return b.upVotes.length - a.upVotes.length;
-    });
-    return decks.slice(0,9);
+    const decks = await deckC.find({}).toArray();
+    decks.sort((a, b) => { a.upvotes.length - b.upvotes.length });
+    return decks.slice(0, 9);
 }
 
 let clearAll = async () => {
-    await collections.decks().remove( {} );
+    let decks = await collections.decks();
+    try { await decks.remove({}); }
+    catch (err) { }
 };
 
 let updateDeck = async (id, info) => {
@@ -43,17 +43,17 @@ let addDeck = async (deckInfo) => {
     if(!deckInfo.cards){
         throw "No cards provided";
     }
-    if(!deckInfo.upVotes){
+    if(!deckInfo.upvotes){
         throw "No upVote information provided";
     }
-    if(!deckInfo.downVotes){
+    if(!deckInfo.downvotes){
         throw "No downVote information provided";
     }
     
     const insertedDeck = await decks.insertOne(deckInfo);
     if(insertedDeck.insertedCount === 0) throw "Could not add deck";
     
-    const deck = await this.getDeck(deckInfo._id);
+    const deck = await getDeck(deckInfo._id);
     return deck;
 }
 
@@ -87,36 +87,36 @@ let upvote = async (deckId, userId) => {
     if(!deckId) throw "No deck ID provided";
     if(!userId) throw "No user ID provided";
     let decks = await deckCollection();
-    const updatedDeck = await decks.updateOne({ _id: deckId }, { $addToSet: { upVotes: userId }});
+    const updatedDeck = await decks.updateOne({ _id: deckId }, { $addToSet: { upvotes: userId }});
     if(updatedDeck.modifiedCount === 0) throw "Could not upVote deck";
-    return await this.getDeck(deckId);
+    return await getDeck(deckId);
 }
 
 let removeUpvote = async (deckId, userId) => {
     if(!deckId) throw "No deck ID provided";
     if(!userId) throw "No user ID provided";
     let decks = await deckCollection();
-    const updatedDeck = await decks.updateOne({ _id: deckId }, { $pull: { upVotes: userId }});
+    const updatedDeck = await decks.updateOne({ _id: deckId }, { $pull: { upvotes: userId }});
     if(updatedDeck.modifiedCount === 0) throw "Could not remove upVote from deck";
-    return await this.getDeck(deckId);
+    return await getDeck(deckId);
 }
 
 let downvoteDeck = async (deckId, userId) => {
     if(!deckId) throw "No deck ID provided";
     if(!userId) throw "No user ID provided";
     let decks = await deckCollection();
-    const updatedDeck = await decks.updateOne({ _id: deckId }, { $addToSet: { downVotes: userId }});
+    const updatedDeck = await decks.updateOne({ _id: deckId }, { $addToSet: { downvotes: userId }});
     if(updatedDeck.modifiedCount === 0) throw "Could not downVote deck";
-    return await this.getDeck(deckId);
+    return await getDeck(deckId);
 }
 
 let removeDownvote = async (deckId, userId) => {
     if(!deckId) throw "No deck ID provided";
     if(!userId) throw "No user ID provided";
     let decks = await deckCollection();
-    const updatedDeck = await decks.updateOne({ _id: deckId }, { $pull: { downVotes: userId }});
+    const updatedDeck = await decks.updateOne({ _id: deckId }, { $pull: { downvotes: userId }});
     if(updatedDeck.modifiedCount === 0) throw "Could not remove downVote from deck";
-    return await this.getDeck(deckId);
+    return await getDeck(deckId);
 }
 
 let getUpvoteCount = async (deckId) => {
@@ -124,7 +124,7 @@ let getUpvoteCount = async (deckId) => {
     let decks = await deckCollection();
     let deck = await decks.findOne({_id: deckId });
     if(deck === null) throw "No deck with that ID";
-    return deck.upVotes.length;
+    return deck.upvotes.length;
 }
 
 let getDownvoteCout = async (deckId) => {
@@ -132,7 +132,7 @@ let getDownvoteCout = async (deckId) => {
     let decks = await deckCollection();
     let deck = await decks.findOne({_id: deckId });
     if(deck === null) throw "No deck with that ID";
-    return deck.downVotes.length;
+    return deck.downvotes.length;
 }
 
 let insertCard = async (deckId, cardId) => {
@@ -141,7 +141,7 @@ let insertCard = async (deckId, cardId) => {
     let decks = await deckCollection();
     const updatedDeck = await decks.updateOne({ _id: deckId }, { $push: { cards: cardId }});
     if(updatedDeck.modifiedCount === 0) throw "Could not add card to deck";
-    return await this.getDeck(deckId);
+    return await getDeck(deckId);
 }
 
 let removeCard = async (deckId, cardId) => {
@@ -150,7 +150,7 @@ let removeCard = async (deckId, cardId) => {
     let decks = await deckCollection();
     const updatedDeck = await decks.updateOne({ _id: deckId }, { $pull: { cards: cardId }});
     if(updatedDeck.modifiedCount === 0) throw "Could not remove card from deck";
-    return await this.getDeck(deckId);
+    return await getDeck(deckId);
 }
 
 module.exports = {
@@ -166,5 +166,7 @@ module.exports = {
     getUpvoteCount: getUpvoteCount,
     getDownvoteCout: getDownvoteCout,
     insertCard: insertCard,
-    removeCard: removeCard
+    removeCard: removeCard,
+    clearAll: clearAll,
+    getTopDecks: getTopDecks
 }

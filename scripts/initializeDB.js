@@ -126,7 +126,7 @@ const exampleDecks = [
         _id: "658d7c9a-b293-45ff-82ed-f082ac4ba3ca",
         owner: "121a31d0-4212-4fd6-979d-5fe38372e90d",
         isPublic: true,
-        name: "Example Deck 1",
+        name: "Example Deck 2",
         description: "This is an example deck.",
         upvotes: [],
         downvotes: [],
@@ -140,7 +140,7 @@ const exampleDecks = [
         _id: "1b8a8228-7085-494c-bb8e-6b1aa60c88c6",
         owner: "742eff97-9601-43d0-a0cb-348d926ded62",
         isPublic: true,
-        name: "Example Deck 1",
+        name: "Example Deck 3",
         description: "This is an example deck.",
         upvotes: [],
         downvotes: [],
@@ -154,7 +154,7 @@ const exampleDecks = [
         _id: "7e2b74f7-858d-4444-9541-eccd05b42608",
         owner: "8f9f340c-05f1-4ce8-9239-3dcf7816df79",
         isPublic: true,
-        name: "Example Deck 1",
+        name: "Example Deck 4",
         description: "This is an example deck.",
         upvotes: [],
         downvotes: [],
@@ -167,7 +167,7 @@ const exampleDecks = [
         _id: "469e5d2e-9257-4b33-a4e6-3ad88621d665",
         owner: "3fdf870d-19d3-496c-8f9b-3ce3f7f662f6",
         isPublic: true,
-        name: "Example Deck 1",
+        name: "Example Deck 5",
         description: "This is an example deck.",
         upvotes: [],
         downvotes: [],
@@ -181,9 +181,9 @@ const exampleDecks = [
 ];
 
 (async () => {
-    let users = collections.userData,
-        cards = collections.cardData,
-        decks = collections.deckData;
+    let users = collections.users,
+        cards = collections.cards,
+        decks = collections.decks;
 
     /* Clear collection */
     await users.clearAll();
@@ -192,7 +192,7 @@ const exampleDecks = [
 
     /* Fill values */
     for (let i = 0; i < exampleUsers.length; i++) {
-        await users.addCard(exampleUsers[i]);
+        await users.addUser(exampleUsers[i]);
     }
 
     for (let i = 0; i < exampleDecks.length; i++) {
@@ -200,7 +200,22 @@ const exampleDecks = [
     }
 
     for (let i = 0; i < exampleCards.length; i++) {
-        await card.addCard(exampleCards[i]);
+        await cards.addCard(exampleCards[i]);
     }
+    
+    /* Dumb test code */
+    let result1 = await cards.getCards();
+    for (let i = 0; i < result1.length; i++) {
+        console.log(result1[i]);
+    }
+
+    let result2 = await decks.getTopDecks();
+    for (let i = 0; i < result2.length; i++) {
+        console.log(result2[i]);
+    }
+
+    console.log("We're done!");
+
+    process.exit(0);
 
 })();
