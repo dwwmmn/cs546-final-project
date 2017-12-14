@@ -90,8 +90,32 @@ app.get("/cards_instance/", (req, res) => {
     res.render("cards/instance", card_obj)
 });
 
+deck_obj = {
+    ownerName: 'Drew',
+    description: 'A good deck',
+    name: 'Drews Delectable Deck',
+    rating: 10,
+
+    cards: [
+        {
+            _id: 0,
+            name: 'Drews best card'
+        },
+        {
+            _id: 1,
+            name: 'Drews other card'
+        }
+    ],
+
+    userName: 'DrewDude'
+};
+
 //Test Deck Instance
-//TODO
+app.get('/decks_instance/', (req, res) => {
+    res.render("decks/instance", deck_obj);
+});
+
+
 
 app.listen(3000, () => {
     console.log("We've now got a server!");

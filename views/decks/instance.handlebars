@@ -5,17 +5,21 @@
             <dt>Owner: </dt>
             <dd>{{ownerName}}</dd>
             <dt>Description: </dt>
-            <dd>{{decsription}}</dd>
+            <dd>{{description}}</dd>
             <dt>Rating: </dt>
             <dd>{{rating}}</dd>
         </dl>
     </div>
     <div id="cards">
-        {{#each cards}}
-        <span id="card">
-            <a href="/cards/{{this.id}}/">{{this.name}}</a>    
-        </span>
+        <ol>
+            {{#each cards}}
+            <li>
+                <span id="card">
+                    <a href="/cards/{{this._id}}/">{{this.name}}</a>    
+                </span>
+            </li>
         {{/each}}
+        </ol>
     </div>
     {{#if userName}}
     <div id="votes">
