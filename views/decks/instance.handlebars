@@ -1,18 +1,18 @@
 <section>
     <div id="deckTitle">
-        <h2>{{name}}</h2>
+        <h2>{{deck.name}}</h2>
         <dl>
             <dt>Owner: </dt>
-            <dd>{{ownerName}}</dd>
+            <dd>{{deck.ownerName}}</dd>
             <dt>Description: </dt>
-            <dd>{{description}}</dd>
+            <dd>{{deck.description}}</dd>
             <dt>Rating: </dt>
-            <dd>{{rating}}</dd>
+            <dd>{{deck.rating}}</dd>
         </dl>
     </div>
     <div id="cards">
         <ol>
-            {{#each cards}}
+            {{#each deck.cards}}
             <li>
                 <span id="card">
                     <a href="/cards/{{this._id}}/">{{this.name}}</a>    
