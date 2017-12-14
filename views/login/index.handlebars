@@ -5,8 +5,8 @@
             <label for="loginField">Username: </label>
             <input id="loginField" name="username" type="text" placeholder="Username" />
             <label for="passwordField">Password: </label>
-            <input id="passwordField" name="password" type="password" />
-            <input type="Submit" />
+            <input id="passwordField" name="password" type="password" placeholder="Password"/>
+            <input type="submit" id="login_button"/>
         </form>
         {{#if message}}
         <span id="error">{{message}}</span>
@@ -15,7 +15,7 @@
     <article>
         <h2>Sign Up</h2>
         <form action="/signup/">
-            <input type="submit" value="Click Here to Sign Up"></input>
+            <input type="submit" value="Click Here to Sign Up" id="signup_button"></input>
         </form>
     </article>
 </section>
