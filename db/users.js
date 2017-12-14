@@ -9,7 +9,7 @@ let updateUser = async (id, info) => {
 
 let addUser = async (userinfo) => {
     let users = await collections.users();
-    userdoc._id = uuid();
+    userinfo._id = uuid();
 
     // TODO
 }

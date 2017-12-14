@@ -5,10 +5,11 @@ const db = require("../db/");
 const users = db.users;
 
 router.get("/", (req, res) => {
-    res.render("signup/index");
+    let msg = req.flash('error')[0];
+    res.render("signup/index", {message: msg});
 });
 
-router.post("/", (req, res) => {
+router.post("/", async(req, res) => {
     let user = {};
 
     if (req.body) {
@@ -17,11 +18,18 @@ router.post("/", (req, res) => {
         user["about"] = req.body.about;
         user["email"] = req.body.email;
         user["password"] = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-        res = await db.addUser(user);
 
-        res.status(500).json({message: "Something went wrong"});
+        let result = await users.addUser(user);
+
+        if (result) {
+            res.redirect("/login");
+        } else {
+            req.flash('error', 'Error signing up');
+            res.redirect("/");
+        }
     } else {
-        res.status(500).json({message: "Something went wrong"});
+        req.flash('error', 'Error signing up');
+        res.redirect("/");
     }
 
 });
