@@ -1,24 +1,26 @@
 // const passport = require("passport");
-const LocalStrategy = require("passport-mongodb").Strategy;
+const CustomStrategy = require("passport-custom").Strategy;
 const bcrypt = require("bcryptjs");
 const withDB = require("../db/mongoSyncSetup.js");
-const DEBUG =true;
+const DEBUG = true;
 
 let setupLocalStrategy = (passport) => {
-    passport.use(new LocalStrategy({
-            // TODO ?
-        },
-        (username, password, done) => {
+    if (DEBUG) console.log("Creating local strategy");
+    passport.use('login-strategy', new CustomStrategy(
+        function (req, done) {
             withDB((err, db) => {
                 if (err)
                     return done(null, false, { message: "Internal error" }); // TODO
-                db.collection("users").findOne({ username: username }, 
+                db.collection("users").findOne({ username: req.body.username }, 
                     (err, user) => {
                         if (!user) {
                             return done(null, false, { message: "Incorrect username" });
                         }
 
-                        bcrypt.compare(password, user.hashedPassword, (err, isValid) => {
+                        console.log(user);
+                        console.log("user.password: " + user.password);
+
+                        bcrypt.compare(req.body.password, user.password, (err, isValid) => {
                             if (!isValid) {
                                 if (DEBUG) console.log("Incorrect password");
                                 done(null, false, { message: 'Incorrect password.' });
@@ -33,10 +35,12 @@ let setupLocalStrategy = (passport) => {
         })
     );
 
+    if (DEBUG) console.log("passport.serializeUser");
     passport.serializeUser((user, callback) => {
-        callback(null, user.id);
+        callback(null, user._id);
     });
 
+    if (DEBUG) console.log("passport.deserializeUser");
     passport.deserializeUser((id, callback) => {
         withDB((err, db) => {
             db.collection("users").findOne({_id: id}, (err, item) => {
@@ -46,4 +50,4 @@ let setupLocalStrategy = (passport) => {
     });
 };
 
-module.exports.setupLocalStrategy = setupLocalStrategy;
+module.exports = setupLocalStrategy;
