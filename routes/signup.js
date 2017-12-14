@@ -5,8 +5,16 @@ const db = require("../db/");
 const users = db.users;
 
 router.get("/", (req, res) => {
-    let msg = req.flash('error')[0];
-    res.render("signup/index", {message: msg});
+    let msg = "";
+
+    if (req.flash('error')) {
+        msg = req.flash('error')[0];
+        res.render("signup/index", { error: msg });
+    } else {
+        msg = req.flash('message')[0];
+        res.render("signup/index", { message: msg });
+    }
+
 });
 
 router.post("/", async(req, res) => {
@@ -25,7 +33,7 @@ router.post("/", async(req, res) => {
             console.log(result);
 
             if (result) {
-                req.flash('error', 'Signed up successfully, log in with your id')
+                req.flash('message', 'Signed up successfully, log in with your id')
                 res.redirect("/login");
             }
         } catch (err) {

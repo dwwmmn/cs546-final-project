@@ -13,6 +13,17 @@ let getDecks = async () => {
     return decks;
 }
 
+let getDecksByName = async (queryName) => {
+    let deckC = await deckCollection();
+    queryName = ".*" + queryName + ".*";
+
+    let decks = await deckC.find( { name: {$regex: queryName }}).toArray();
+
+    decks.sort((a, b) => { a.rating - b.rating });;
+
+    return decks;
+}
+
 let getTopDecks = async (id, info) => {
     let deckC = await deckCollection();
     const decks = await deckC.find({}).toArray();
@@ -191,6 +202,7 @@ let removeCard = async (deckId, cardId) => {
 
 module.exports = {
     getDecks: getDecks,
+    getDecksByName: getDecksByName,
     getTopDecks: getTopDecks,
     updateDeck: updateDeck,
     addDeck: addDeck,
@@ -205,5 +217,5 @@ module.exports = {
     insertCard: insertCard,
     removeCard: removeCard,
     clearAll: clearAll,
-    getTopDecks: getTopDecks
+    getTopDecks: getTopDecks,
 }

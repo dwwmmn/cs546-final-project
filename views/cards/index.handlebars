@@ -38,6 +38,7 @@
 <section id="page_navigation">
     <nav>
 \        <form id="page" method="POST">
+            <input type="hidden" name="search" value="{{searchName}}"></input>
             <input name="prev" type="submit" name="action" formaction="/cards/prev" value="Prev"></input>
             <input name="pageNumber" type="text" value="{{pageNumber}}"></input>
             <input name="goToPage" type="submit" name="action" formaction="/cards/goto" value="Go To Page"></input>
