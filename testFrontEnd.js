@@ -75,7 +75,23 @@ app.get("/cards/", (req, res) => {
 
 app.get("/signup/", (req, res) => {
     res.render('signup/index', {})
-})
+});
+
+//Test card instance
+card_obj = {
+    name: "Mongod",
+    effect: "Kill You.",
+    cost: 5,
+    power: 10,
+    rarity: "Secret"
+};
+
+app.get("/cards_instance/", (req, res) => {
+    res.render("cards/instance", card_obj)
+});
+
+//Test Deck Instance
+//TODO
 
 app.listen(3000, () => {
     console.log("We've now got a server!");

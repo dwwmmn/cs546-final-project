@@ -1,1 +1,28 @@
-<!-- TODO -->
+<section>
+    <div id="deckTitle">
+        <h2>{{name}}</h2>
+        <dl>
+            <dt>Owner: </dt>
+            <dd>{{ownerName}}</dd>
+            <dt>Description: </dt>
+            <dd>{{decsription}}</dd>
+            <dt>Rating: </dt>
+            <dd>{{rating}}</dd>
+        </dl>
+    </div>
+    <div id="cards">
+        {{#each cards}}
+        <span id="card">
+            <a href="/cards/{{this.id}}/">{{this.name}}</a>    
+        </span>
+        {{/each}}
+    </div>
+    {{#if userName}}
+    <div id="votes">
+        <form id="voteForm" method="POST">
+            <input type="submit" name="action" value="Upvote" />
+            <input type="submit" name="action" value="Downvote" />
+        </form>
+    </div>
+    {{/if}}
+</section>
