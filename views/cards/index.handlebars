@@ -17,14 +17,15 @@
                     <a href="/cards/{{this._id}}">{{this.name}}</a>
                     <p>{{this.effect}}</p>
 
-                    {{#if myDecks}}
+                    {{#if ../myDecks}}
                         <form class="addToDeckQuery" method="POST">
                             <legend>Add card to a deck.</legend>
                             <select>
-                                {{#each myDecks}}
+                                {{#each ../myDecks}}
                                     <option value="{{this._id}}">{{this.name}}</option>
                                 {{/each}}
                             </select>
+                            <input name="addToDeck" type="submit" formaction="/cards/add" value="Add to Deck" />
                         </form>
                     {{/if}}
                 </article>
@@ -37,7 +38,7 @@
 
 <section id="page_navigation">
     <nav>
-\        <form id="page" method="POST">
+        <form id="page" method="POST">
             <input type="hidden" name="search" value="{{searchName}}"></input>
             <input name="prev" type="submit" name="action" formaction="/cards/prev" value="Prev"></input>
             <input name="pageNumber" type="text" value="{{pageNumber}}"></input>
