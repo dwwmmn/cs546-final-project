@@ -1,13 +1,16 @@
-
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 
-router.get("/", (req, resp) => {
-    // TODO
+router.get("/", (req, res) => {
+    let msg = req.flash('error')[0];
+    res.render("login/index", {message: msg});
 });
 
-router.post("/", (req, resp) => {
+router.post("/", passport.authenticate('mongodb', {failureRedirect: '/login', failureFlash: true}),
+    (req, res) => {
     // TODO
+    res.redirect("/");
 });
 
 module.exports = router;

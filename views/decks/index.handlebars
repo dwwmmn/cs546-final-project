@@ -1,0 +1,36 @@
+<section id="search_form">
+    <form id="search">
+        <legend>Search for Decks</legend>
+        <p>
+            <label for="name">Deck Name: </label>
+            <input name="name" id="name" value="{{searchName}}"></input>
+
+            <!-- TODO -->
+        </p>
+    </form>
+</section>
+
+<section id="decks">
+    <ol>
+        {{#each decks}}
+            <li>
+                <article class="deck">
+                    <a href="/decks/{{this._id}}">{{this.name}}</a>
+                    <p>{{this.description}}</p>
+                </article>
+            </li>
+        {{/each}}
+    </ol>
+</section>
+
+<section id="page_navigation">
+    <nav>
+        <form method="POST">
+            <input name="prev" type="button" value="Prev"></input>
+            <input name="pageNumber" type="text" value="{{pageNumber}}"></input>
+            <input name="goToPage" type="submit" value="Go To Page"></input>
+            <input name="next" type="button" value="Next"></input>
+        </form>
+    </nav>
+
+</section>

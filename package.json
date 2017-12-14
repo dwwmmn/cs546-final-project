@@ -4,7 +4,9 @@
   "description": "CS546 Web Development - Final Project",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "initdb": "node scripts/initializeDB.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -17,11 +19,15 @@
   },
   "homepage": "https://github.com/dwwmmn/cs546-final-project#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
+    "connect-flash": "^0.1.1",
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
-    "mongodb": "^3.0.0-rc0",
+    "express-session": "^1.15.6",
+    "mongodb": "^2.2.33",
     "passport": "^0.4.0",
+    "passport-mongodb": "^1.2.0",
     "uuid": "^3.1.0"
   }
 }

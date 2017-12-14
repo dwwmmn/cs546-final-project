@@ -1,0 +1,33 @@
+<section id="search_form">
+    <form id="search">
+        <legend>Search for Cards</legend>
+        <p>
+            <!-- TODO -->
+        </p>
+    </form>
+</section>
+
+<section id="cards">
+    <ol>
+        {{#each cards}}
+            <li>
+                <article class="card">
+                    <a href="/cards/{{this._id}}">{{this.name}}</a>
+                    <p>{{this.effect}}</p>
+                </article>
+            </li>
+        {{/each}}
+    </ol>
+</section>
+
+<section id="page_navigation">
+    <nav>
+        <form method="POST">
+            <input name="prev" type="button" value="Prev"></input>
+            <input name="pageNumber" type="text" value="{{pageNumber}}"></input>
+            <input name="goToPage" type="submit" value="Go To Page"></input>
+            <input name="next" type="button" value="Next"></input>
+        </form>
+    </nav>
+
+</section>
