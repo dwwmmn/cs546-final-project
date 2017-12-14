@@ -8,6 +8,7 @@ let getDecks = async () => {
     let deckC = await deckCollection();
 
     let decks = await deckC.find({}).toArray();
+    decks.sort((a, b) => { a.rating - b.rating });
 
     return decks;
 }
@@ -15,7 +16,7 @@ let getDecks = async () => {
 let getTopDecks = async (id, info) => {
     let deckC = await deckCollection();
     const decks = await deckC.find({}).toArray();
-    decks.sort((a, b) => { a.upvotes.length - b.upvotes.length });
+    decks.sort((a, b) => { a.rating - b.rating });
 
     return decks.slice(0, 9);
 }

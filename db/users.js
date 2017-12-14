@@ -46,7 +46,6 @@ let addUser = async (userinfo) => {
     let result2 = await getUserByUsername(userinfo.username); 
 
     if (result1) {
-        console.log(result1);
         throw "Email address in use";
     }
     

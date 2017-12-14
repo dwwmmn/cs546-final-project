@@ -18,7 +18,6 @@ router.get("/", async(req, res) => {
 
         res.render("decks/index", results);
     } catch (err) {
-        console.log(err);
         res.status(404).json({message: "Something went wrong"});
     }
 });
@@ -36,7 +35,6 @@ router.get("/:deckId", async(req, res) => {
             results.username = user.username;
         }
 
-        console.log(results);
 
         res.render("decks/instance", results);
     } catch (err) {

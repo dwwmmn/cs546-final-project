@@ -46,6 +46,7 @@ let addCard = async (cardInfo) => {
 let deleteCard = async (id) => {
     if(id === undefined) throw "No card ID specified";
     let cards = await cardCollection();
+
     const deletedInfo = await cards.removeOne({ _id: id });
     if(deletedInfo.deletedCount === 0) {
         throw "Could not delete specified card";
