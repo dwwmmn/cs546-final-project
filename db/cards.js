@@ -63,6 +63,15 @@ let getCard = async (id) => {
     
 }
 
+let getCardsByName = async(queryName) => {
+    let cards = await cardCollection();
+    queryName = ".*" + queryName + ".*";
+
+    let card = await cards.find({ name: { $regex: queryName } }).toArray();
+
+    return card;
+}
+
 let getCards = async () => {
     let cardC = await cardCollection();
     
@@ -76,6 +85,7 @@ module.exports = {
     addCard: addCard,
     deleteCard: deleteCard,
     getCard: getCard,
+    getCardsByName: getCardsByName,
     getCards: getCards,
     clearAll: clearAll
 }
