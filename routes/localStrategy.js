@@ -46,4 +46,4 @@ let setupLocalStrategy = (passport) => {
     });
 };
 
-module.exports.setupLocalStrategy = setupLocalStrategy;
+module.exports = setupLocalStrategy;

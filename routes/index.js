@@ -8,16 +8,15 @@ const passport = require("passport");
 /* Require different routes */
 const accountRoutes = require("./account.js");
 const homeRoutes = require("./home.js");
-const loginRoutes = require("./login.js");
+const createAuthdRoute = require("./login.js");
 //const searchRoutes = require("./search.js");
 const cardRoutes = require("./cards.js");
 const deckRoutes = require("./decks.js");
 const signupRoutes = require("./signup.js");
 
-const strategy = require("./localStrategy.js");
+const setupLocalStrategy = require("./localStrategy.js");
 const exphbs = require("express-handlebars");
 const Handlebars = require("handlebars");
-
 
 module.exports = (app) => {
     app.use(session({
@@ -26,10 +25,12 @@ module.exports = (app) => {
         saveUninitialized: true
         // cookie: { secure: true }
     }));
-    strategy.setupLocalStrategy(passport);
+
+    setupLocalStrategy(passport);
+
     app.use(passport.initialize());
     app.use(passport.session());
-
+    
     const handlebarsInstance = exphbs.create({
       defaultLayout: "main",
       // Specify helpers which are only registered on this instance.
@@ -43,19 +44,20 @@ module.exports = (app) => {
       }
   });
 
+    /* Handlebars */
     app.engine("handlebars", handlebarsInstance.engine);
     app.set('view engine', 'handlebars');
+    app.set("views", __dirname + "/../views/");
+    
     /* Tell router to populate req.body */
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(flash());    
 
-
-
     /* Assign routes to application */
     app.use("/account", accountRoutes);
     app.use("/", homeRoutes);
-    app.use("/login", loginRoutes);
+    app.use("/login", createAuthdRoute(passport));
     app.use("/signup", signupRoutes);
     app.use("/cards", cardRoutes);
     app.use("/decks", deckRoutes);
