@@ -75,7 +75,47 @@ app.get("/cards/", (req, res) => {
 
 app.get("/signup/", (req, res) => {
     res.render('signup/index', {})
-})
+});
+
+//Test card instance
+card_obj = {
+    name: "Mongod",
+    effect: "Kill You.",
+    cost: 5,
+    power: 10,
+    rarity: "Secret"
+};
+
+app.get("/cards_instance/", (req, res) => {
+    res.render("cards/instance", card_obj)
+});
+
+deck_obj = {
+    ownerName: 'Drew',
+    description: 'A good deck',
+    name: 'Drews Delectable Deck',
+    rating: 10,
+
+    cards: [
+        {
+            _id: 0,
+            name: 'Drews best card'
+        },
+        {
+            _id: 1,
+            name: 'Drews other card'
+        }
+    ],
+
+    userName: 'DrewDude'
+};
+
+//Test Deck Instance
+app.get('/decks_instance/', (req, res) => {
+    res.render("decks/instance", deck_obj);
+});
+
+
 
 app.listen(3000, () => {
     console.log("We've now got a server!");
