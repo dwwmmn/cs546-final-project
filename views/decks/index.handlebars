@@ -15,7 +15,7 @@
         {{#each decks}}
             <li>
                 <article class="deck">
-                    <p id="rating">{{rating}}</p>
+                    <p id="rating">Rating: {{this.rating}}</p>
                     <a href="/decks/{{this._id}}">{{this.name}}</a>
                     <p>{{this.description}}</p>
                 </article>
@@ -27,10 +27,10 @@
 <section id="page_navigation">
     <nav>
         <form method="POST">
-            <input name="prev" type="button" value="Prev"></input>
+            <input name="prev" type="submit" name="action" value="Prev"></input>
             <input name="pageNumber" type="text" value="{{pageNumber}}"></input>
-            <input name="goToPage" type="submit" value="Go To Page"></input>
-            <input name="next" type="button" value="Next"></input>
+            <input name="goToPage" type="submit" name="action" value="Go To Page"></input>
+            <input name="next" type="submit" name="action" value="Next"></input>
         </form>
     </nav>
 

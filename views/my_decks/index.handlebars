@@ -1,0 +1,19 @@
+<section id="my_decks">
+    <ol>
+        {{#each deck}}
+            <li>
+                <artcile class="deck_article">
+                    <h2 class="deck_name"><a href="decks/{{this._id}}">{{this.name}}</h2>
+                    <dl>
+                        <dt>Description: </dt>
+                        <dd><span class="deck_description">{{this.description}}</span></dd>
+                        <dt>Rating: </dt>
+                        <dd>{{this.rating}}</dd>
+                        <!-- TODO: PUBLISH/UNPUBLISH -->
+                    </dl>
+                    
+                </artcile>
+            </li>
+        {{/each}}
+    </ol>
+</section>
