@@ -16,7 +16,20 @@
                 <article class="card">
                     <a href="/cards/{{this._id}}">{{this.name}}</a>
                     <p>{{this.effect}}</p>
+
+                    {{#if myDecks}}
+                        <form class="addToDeckQuery" method="POST">
+                            <legend>Add card to a deck.</legend>
+                            <select>
+                                {{#each myDecks}}
+                                    <option value="{{this._id}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </form>
+                    {{/if}}
                 </article>
+
+
             </li>
         {{/each}}
     </ol>
