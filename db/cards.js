@@ -58,7 +58,7 @@ let getCard = async (id) => {
     let cards = await cardCollection();
     let card = await cards.findOne({_id: id });
     if(card === null) throw "No card with that ID";
-    return card.card;
+    return card;
     
 }
 

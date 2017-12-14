@@ -4,9 +4,8 @@ const users = collections.users;
 
 let clearAll = async () => {
     let usersC = await users();
-    try { await users.remove({}); }
-    catch(err) { }
-};
+    await usersC.remove({});
+}
 
 let updateUser = async (id, info) => {
     let usersC = await users();

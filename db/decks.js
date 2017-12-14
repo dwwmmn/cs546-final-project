@@ -1,7 +1,7 @@
 const uuid = require("uuid/v4");
 const collections = require("./mongoSetup.js");
 const deckCollection = collections.decks;
-const cardCollection = collection.cards;
+const cardC = require("./cards.js");
 
 
 let getDecks = async () => {
@@ -86,18 +86,21 @@ let deleteDeck = async (deckId) => {
 
 let getDeck = async (deckId) => {
     if(!deckId) throw "No deck ID specified";
-    let decks = await deckCollection();
-    let cardC = await cardCollection();
+    let deckC = await deckCollection();
 
-    let deck = await decks.findOne({_id: deckId });
+    let deck = await deckC.findOne({_id: deckId });
     if(deck === null) throw "No deck with that ID";
 
     let cardsInDeck = [];
 
-    for (let i = 0; i < decks.cards.length; ++i) {
-        let newCard = await cardC.getCard(decks.cards[i]);
+    for (let i = 0; i < deck.cards.length; ++i) {
+        //console.log(deck.cards[i]);
+        let newCard = await cardC.getCard(deck.cards[i]);
+        //console.log(newCard);
         cardsInDeck.push(newCard);
     }
+
+    //console.log(cardsInDeck);
 
     deck.cards = cardsInDeck;
 

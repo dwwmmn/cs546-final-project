@@ -182,15 +182,30 @@ const exampleDecks = [
 
     /* Fill values */
     for (let i = 0; i < exampleUsers.length; i++) {
-        await users.addUser(exampleUsers[i]);
-    }
-
-    for (let i = 0; i < exampleDecks.length; i++) {
-        await decks.addDeck(exampleDecks[i]);
+        try {
+            await users.addUser(exampleUsers[i]);
+        } catch (err) {
+            console.log(exampleUsers[i]);
+            console.error(err);
+        }
     }
 
     for (let i = 0; i < exampleCards.length; i++) {
-        await cards.addCard(exampleCards[i]);
+        try {
+            await cards.addCard(exampleCards[i]);
+        } catch (err) {
+            console.log(exampleCards[i]);
+            console.error(err);
+        }
+    }
+
+    for (let i = 0; i < exampleDecks.length; i++) {
+        try {
+            await decks.addDeck(exampleDecks[i]);
+        } catch (err) {
+            console.log(exampleDecks[i]);
+            console.error(err);
+        }
     }
     
     /* Dumb test code */
@@ -198,6 +213,7 @@ const exampleDecks = [
     for (let i = 0; i < result1.length; i++) {
         console.log(result1[i]);
     }
+    
 
     let result2 = await decks.getTopDecks();
     for (let i = 0; i < result2.length; i++) {
