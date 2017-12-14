@@ -69,10 +69,6 @@ app.get("/account/", (req, res) => {
     res.render('account/index', {userName: userName, user: user});
 });
 
-app.get("/cards/", (req, res) => {
-    res.render('cards/index', {userName: userName, cards: cards})
-});
-
 app.get("/signup/", (req, res) => {
     res.render('signup/index', {})
 });
@@ -91,6 +87,7 @@ app.get("/cards_instance/", (req, res) => {
 });
 
 deck_obj = {
+    _id: 0,
     ownerName: 'Drew',
     description: 'A good deck',
     name: 'Drews Delectable Deck',
@@ -110,12 +107,40 @@ deck_obj = {
     userName: 'DrewDude'
 };
 
+deck_obj_2 = {
+    _id: 1,
+    ownerName: 'Drew',
+    description: 'A great deck',
+    name: 'Drews Decent Deck',
+    rating: 6,
+
+    cards: [
+        {
+            _id: 0,
+            name: 'Drews best card'
+        },
+        {
+            _id: 1,
+            name: 'Drews other card'
+        }
+    ],
+
+    userName: 'DrewDude'
+};
+
+decks = [
+    deck_obj,
+    deck_obj_2
+];
+
+app.get("/cards/", (req, res) => {
+    res.render('cards/index', {userName: userName, cards: cards, })
+});
+
 //Test Deck Instance
 app.get('/decks_instance/', (req, res) => {
     res.render("decks/instance", deck_obj);
 });
-
-
 
 app.listen(3000, () => {
     console.log("We've now got a server!");
