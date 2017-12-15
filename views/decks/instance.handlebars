@@ -17,20 +17,20 @@
                 <span id="card">
                     <a href="/cards/{{this._id}}/">{{this.name}}</a>    
                 </span>
-                {{#if canDelete}}
+                {{#if ../canDelete}}
                 <form method="POST" class="deleteCard">
-                    <input name="deleteCard" type="submit" formaction="/decks/{{../deck._id}}/delete" value="{{this._id}}" />
+                    <input name="deleteCard" type="submit" formaction="/decks/{{../deck._id}}/delete/{{this._id}}" value="Delete card" />
                 </form>
                 {{/if}}
             </li>
         {{/each}}
         </ol>
     </div>
-    {{#if userName}}
+    {{#if username}}
     <div id="votes">
         <form id="voteForm" method="POST">
-            <input type="submit" name="action" formaction="/decks/upvote" value="Upvote" />
-            <input type="submit" name="action" formaction="/decks/downvote" value="Downvote" />
+            <input type="submit" name="action" formaction="/decks/{{deck._id}}/upvote" value="Upvote" />
+            <input type="submit" name="action" formaction="/decks/{{deck._id}}/downvote" value="Downvote" />
         </form>
     </div>
     {{/if}}

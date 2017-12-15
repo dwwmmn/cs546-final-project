@@ -61,14 +61,23 @@ router.get("/:deckId", async(req, res) => {
 
         if (req.user) {
             let user = await users.getUser(req.user._id);
+            results.username = user.username;
+
+            if (deck.upvotes.includes(user._id)) {
+                results.unUpvotes = true;
+            }
+
+            if (deck.downvotes.includes(user._id)) {
+                results.unDownvotes = true;
+            }
 
             if (user._id == deck.owner) {
                 results.canDelete = true;
             }
+
             results.username = user.username;
         }
 
-        console.log(results);
 
         res.render("decks/instance", results);
     } catch (err) {
@@ -96,7 +105,6 @@ router.post("/search", async(req, res) => {
         res.render("decks/index", results);
 
     } catch (err) {
-        console.log(err);
         res.status(500).json({ message: "Something went wrong :("});
     }
 });
@@ -198,25 +206,24 @@ router.post("/create", async(req, res) => {
 
         }
     } catch (err) {
-        console.log(err);
         req.flash('error', "Deck name already taken");
         res.redirect("/decks/create");
     }
 });
 
-router.post("/:deckId/delete", async(req, res) => {
+router.post("/:deckId/delete/:cardId", async(req, res) => {
     try {
         if (req.user) {
             let user = await users.getUser(req.user._id);
             let deck = await decks.getDeck(req.params.deckId);
 
             if (deck.owner == user._id) {
-                deck = await decks.removeCard(deck._id, req.body.deleteCard);
+                deck = await decks.removeCard(deck._id, req.params.cardId);
 
-                res.redirect("/decks/ " + deck._id);
+                res.redirect("/decks/" + deck._id);
             } else {
                 req.flash("error", "You are not the deck owner!");
-                res.redirect("/decks/ " + deck._id);
+                res.redirect("/decks/" + deck._id);
             }
         } else {
             req.flash("error", "You must login for that");
@@ -224,8 +231,80 @@ router.post("/:deckId/delete", async(req, res) => {
         }
     } catch (err) {
         console.log(err);
+        res.status(500).json({message: "Something went wrong"});
     }
 
 });
 
+router.post("/:deckId/upvote", async(req, res) => {
+    try {
+        let deckId = req.params.deckId;
+        if (req.user) {
+            let user = await users.getUser(req.user._id);
+            await decks.upvote(deckId, user._id);
+
+            res.redirect("/decks/" + deckId);
+        } else {
+            req.flash("error", "You must log in to do that");
+            res.redirect("/decks/" + deckId);
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({message: "Something went wrong"});
+    }
+});
+
+router.post("/:deckId/downvote", async(req, res) => {
+    try {
+        let deckId = req.params.deckId;
+        if (req.user) {
+            let user = await users.getUser(req.user._id);
+            await decks.downvote(deckId, user._id);
+
+            res.redirect("/decks/" + deckId);
+        } else {
+            req.flash("error", "You must log in to do that");
+            res.redirect("/decks/" + deckId);
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({message: "Something went wrong"});
+    }
+});
+
+router.post("/:deckId/removeUpvote", async(req, res) => {
+    try {
+        let deckId = req.params.deckId;
+        if (req.user) {
+            let user = await users.getUser(req.user._id);
+            await decks.removeUpvote(deckId, user._id);
+
+            res.redirect("/decks/" + deckId);
+        } else {
+            req.flash("error", "You must log in to do that");
+            res.redirect("/decks/" + deckId);
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({message: "Something went wrong"});
+    }
+});
+
+router.post("/:deckId/removeDownvote", async(req, res) => {
+    try {
+        let deckId = req.params.deckId;
+        if (req.user) {
+            let user = await users.getUser(req.user._id);
+            await decks.removeDownvote(deckId, user._id);
+
+            res.redirect("/decks/" + deckId);
+        } else {
+            req.flash("error", "You must log in to do that");
+            res.redirect("/decks/" + deckId);
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({message: "Something went wrong"});
+    }
+});
 module.exports = router;
