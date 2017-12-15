@@ -13,10 +13,13 @@
 
     {{#if myDecks}}
         <span>
-            
-        {{#each myDecks}}
-            <>
-        {{/each}}
+            <form class="addToDeckQuery" method="POST">
+                <select>
+                    {{#each myDecks}}
+                        <option value="{{this._id}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </form>>
         </span>
     {{/if}}
 </section>
