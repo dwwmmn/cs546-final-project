@@ -10,6 +10,9 @@
 </section>
 
 <section id="cards">
+    {{#if ../message}}
+        <span><p>{{../message}}</p></span>
+    {{/if}}
     <ol>
         {{#each cards}}
             <li>
@@ -27,9 +30,7 @@
                             </select>
                             <input name="addToDeck" type="submit" formaction="/cards/add/{{this._id}}" value="Add to Deck" />
                         </form>
-                        {{#if ../message}}
-                        <span><p>{{../message}}</p></span>
-                        {{/if}}
+
                     {{/if}}
                 </article>
 
