@@ -1,0 +1,66 @@
+html * {
+    background-color: rgb(220, 220, 220);
+}
+
+head {
+    background-color: black;
+}
+
+#title {
+    color:	rgb(128,0,0);
+    text-align: center;
+    clear: right;
+    font-size: 28px;
+}
+
+#login_div {
+    font-size: 20px;
+    padding-right: 20px;
+    list-style-type: square;
+}
+
+div p {
+    font-size: 24px;
+}
+
+a:visited, a:link{
+    color: rgb(1, 67, 223);
+    text-decoration: none;
+}
+
+#site_links {
+    color: rgb(1, 67, 223);
+    font-size: 28px;
+    font-style: normal;
+    text-align: center;
+}
+
+#site_links li {
+    display: inline-block;
+    text-align: center;
+    vertical-align: text-top;
+    width: 180px;
+}
+
+#login_div li {
+    list-style-type: none;
+}
+
+#search legend{
+    font-size: 30px;
+}
+
+input {
+    background-color: white;
+    font-size: 18px;
+}
+
+input[type="button"], input[type="submit"] {
+    font-size: 20px;
+    font-size: 22px;
+}
+
+label {
+    font-size: 22px;
+    padding-left: 8px;
+}

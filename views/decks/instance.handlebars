@@ -1,6 +1,15 @@
 <section>
     <div id="deckTitle">
         <h2>{{deck.name}}</h2>
+        {{#if canDelete}}
+            <form id="publishForm" method="Post">
+                {{#if public}}
+                <input name="unpublish" type="submit" formaction="/decks/{{deck._id}}/unpublish" value="Unpublish Deck" />
+                {{else}}
+                <input name="publish" type="submit" formaction="/decks/{{deck._id}}/publish" value="Publish Deck" />
+                {{/if}}
+            </form>
+        {{/if}}
         <dl>
             <dt>Owner: </dt>
             <dd>{{deck.ownerName}}</dd>
@@ -17,16 +26,43 @@
                 <span id="card">
                     <a href="/cards/{{this._id}}/">{{this.name}}</a>    
                 </span>
+                {{#if ../canDelete}}
+                <form method="POST" class="deleteCard">
+                    <input name="deleteCard" type="submit" formaction="/decks/{{../deck._id}}/delete/{{this._id}}" value="Delete card" />
+                </form>
+                {{/if}}
             </li>
         {{/each}}
         </ol>
     </div>
-    {{#if userName}}
-    <div id="votes">
-        <form id="voteForm" method="POST">
-            <input type="submit" name="action" value="Upvote" />
-            <input type="submit" name="action" value="Downvote" />
+    {{#if canDelete}}
+    <div>
+        <form method="Post">
+            <input name="deleteDeck" type="submit" formaction="/decks/{{deck._id}}/delete" value="Delete Deck" />
         </form>
     </div>
+    {{/if}}
+    {{#if username}}
+    <div id="votes">
+        <form id="voteForm" method="POST">
+            {{#if unUpvotes}}
+                <input type="submit" name="action" formaction="/decks/{{deck._id}}/removeUpvote" value="Remove Upvote" />
+
+            {{else}}
+                <input type="submit" name="action" formaction="/decks/{{deck._id}}/upvote" value="Upvote" />
+            {{/if}}
+            {{#if unDownvotes}}
+                <input type="submit" name="action" formaction="/decks/{{deck._id}}/removeDownvote" value="Remove Downvote" />
+            {{else}}
+            <input type="submit" name="action" formaction="/decks/{{deck._id}}/downvote" value="Downvote" />
+            {{/if}}
+        </form>
+    </div>
+    {{/if}}
+    {{#if message}}
+    <span id="message">{{message}}</span>
+    {{/if}}
+    {{#if error}}
+    <span id="error">{{error}}</span>
     {{/if}}
 </section>

@@ -1,20 +1,39 @@
 <section id="search_form">
-    <form id="search">
+    <form id="search" method="POST">
         <legend>Search for Cards</legend>
         <p>
-            <!-- TODO -->
+            <label for="name">Deck Name: </label>
+            <input name="name" id="name"  value="{{searchName}}"></input>
+            <input name="search" type="submit" name="action" formaction="/cards/search" value="Search"></input>
         </p>
     </form>
 </section>
 
 <section id="cards">
+    {{#if ../message}}
+        <span><p>{{../message}}</p></span>
+    {{/if}}
     <ol>
         {{#each cards}}
             <li>
                 <article class="card">
                     <a href="/cards/{{this._id}}">{{this.name}}</a>
                     <p>{{this.effect}}</p>
+                    {{#if ../myDecks}}
+                        <form class="addToDeckQuery" method="POST">
+                            <legend>Add card to a deck.</legend>
+                            <select name="deckToAdd">
+                                {{#each ../myDecks}}
+                                    <option value="{{this._id}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                            <input name="addToDeck" type="submit" formaction="/cards/add/{{this._id}}" value="Add to Deck" />
+                        </form>
+
+                    {{/if}}
                 </article>
+
+
             </li>
         {{/each}}
     </ol>
@@ -22,11 +41,12 @@
 
 <section id="page_navigation">
     <nav>
-        <form method="POST">
-            <input name="prev" type="submit" name="action" value="Prev"></input>
+        <form id="page" method="POST">
+            <input type="hidden" name="search" value="{{searchName}}"></input>
+            <input name="prev" type="submit" name="action" formaction="/cards/prev" value="Prev"></input>
             <input name="pageNumber" type="text" value="{{pageNumber}}"></input>
-            <input name="goToPage" type="submit" value="Go To Page"></input>
-            <input name="next" type="submit" name="action" value="Next"></input>
+            <input name="goToPage" type="submit" name="action" formaction="/cards/goto" value="Go To Page"></input>
+            <input name="next" type="submit" name="action" formaction="/cards/next" value="Next"></input>
         </form>
     </nav>
 

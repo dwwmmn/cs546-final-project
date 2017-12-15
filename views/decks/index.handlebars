@@ -1,11 +1,10 @@
 <section id="search_form">
-    <form id="search">
+    <form id="search" method="POST">
         <legend>Search for Decks</legend>
         <p>
             <label for="name">Deck Name: </label>
-            <input name="name" id="name" value="{{searchName}}"></input>
-
-            <!-- TODO -->
+            <input name="name" id="name"  value="{{searchName}}"></input>
+            <input name="search" type="submit" name="action" formaction="/decks/search" value="Search"></input>
         </p>
     </form>
 </section>
@@ -26,11 +25,12 @@
 
 <section id="page_navigation">
     <nav>
-        <form method="POST">
-            <input name="prev" type="submit" name="action" value="Prev"></input>
+        <form id="page" method="POST">
+            <input type="hidden" name="search" value="{{searchName}}"></input>
+            <input name="prev" type="submit" name="action" formaction="/decks/prev" value="Prev"></input>
             <input name="pageNumber" type="text" value="{{pageNumber}}"></input>
-            <input name="goToPage" type="submit" name="action" value="Go To Page"></input>
-            <input name="next" type="submit" name="action" value="Next"></input>
+            <input name="goToPage" type="submit" name="action" formaction="/decks/goto" value="Go To Page"></input>
+            <input name="next" type="submit" name="action" formaction="/decks/next" value="Next"></input>
         </form>
     </nav>
 

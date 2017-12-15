@@ -18,9 +18,11 @@ let updateCard = async () => {
 
 let addCard = async (cardInfo) => {
     let cards = await cardCollection();
-    if(!cardInfo._id){
-        throw "No ID provided";
+
+    if (!cardInfo._id) {
+        cardInfo._id = uuid();
     }
+
     if(!cardInfo.name){
         throw "No name provided";
     }
@@ -36,6 +38,10 @@ let addCard = async (cardInfo) => {
     if(!cardInfo.rarity){
         throw "No rarity provided";
     }
+    if (!cardInfo.image) {
+        throw "No image resource provided";
+    }
+
     const insertedCard = await cards.insertOne(cardInfo);
     if(insertedCard.insertedCount === 0) throw "Could not add card";
     
@@ -63,10 +69,23 @@ let getCard = async (id) => {
     
 }
 
+let getCardsByName = async(queryName) => {
+    let cards = await cardCollection();
+    queryName = ".*" + queryName + ".*";
+
+    let card = await cards.find({ name: { $regex: queryName } }).toArray();
+
+    card.sort();
+
+    return card;
+}
+
 let getCards = async () => {
     let cardC = await cardCollection();
     
     const cards = await cardC.find({}).toArray();
+    cards.sort();
+
     
     return cards;
 }
@@ -76,6 +95,7 @@ module.exports = {
     addCard: addCard,
     deleteCard: deleteCard,
     getCard: getCard,
+    getCardsByName: getCardsByName,
     getCards: getCards,
     clearAll: clearAll
 }

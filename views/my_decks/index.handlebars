@@ -1,19 +1,25 @@
 <section id="my_decks">
+    {{#if message}}
+    <p id="message">{{message}}</p>
+    {{/if}}
     <ol>
-        {{#each deck}}
+        {{#each decks}}
             <li>
-                <artcile class="deck_article">
-                    <h2 class="deck_name"><a href="decks/{{this._id}}">{{this.name}}</h2>
+                <article class="deck_article">
+                    <h2 class="deck_name"><a href="/decks/{{this._id}}">{{this.name}}</a></h2>
                     <dl>
                         <dt>Description: </dt>
                         <dd><span class="deck_description">{{this.description}}</span></dd>
                         <dt>Rating: </dt>
                         <dd>{{this.rating}}</dd>
-                        <!-- TODO: PUBLISH/UNPUBLISH -->
                     </dl>
-                    
-                </artcile>
+
+                    <form id="deleteForm" method="Post">
+                        <input name="deleteDeck" type="submit" formaction="/decks/{{this._id}}/delete" value="Delete Deck" />
+                    </form>
+                </article>
             </li>
         {{/each}}
     </ol>
+    <a href="/decks/create">Create Your Own Deck! :) (SAVE ME)</a>
 </section>
