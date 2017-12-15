@@ -11,7 +11,12 @@
         <dd>{{card.rarity}}</dd>
     </dl>
 
-    {{#if userName}}
-    <!-- TODO: Add to Deck Option -->
+    {{#if myDecks}}
+        <span>
+            
+        {{#each myDecks}}
+            <>
+        {{/each}}
+        </span>
     {{/if}}
 </section>
