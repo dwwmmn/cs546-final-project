@@ -167,7 +167,6 @@ let deleteDeck = async (deckId) => {
     }
 }
 
-// TODO Fix rating system (if user upvotes then downvotes what should happen!?"
 
 let upvote = async (deckId, userId) => {
     if(!deckId) throw "No deck ID provided";

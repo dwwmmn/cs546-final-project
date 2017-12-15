@@ -29,8 +29,17 @@
     {{#if username}}
     <div id="votes">
         <form id="voteForm" method="POST">
-            <input type="submit" name="action" formaction="/decks/{{deck._id}}/upvote" value="Upvote" />
+            {{#if unUpvotes}}
+                <input type="submit" name="action" formaction="/decks/{{deck._id}}/removeUpvote" value="Remove Upvote" />
+
+            {{else}}
+                <input type="submit" name="action" formaction="/decks/{{deck._id}}/upvote" value="Upvote" />
+            {{/if}}
+            {{#if unDownvotes}}
+                <input type="submit" name="action" formaction="/decks/{{deck._id}}/removeDownvote" value="Remove Downvote" />
+            {{else}}
             <input type="submit" name="action" formaction="/decks/{{deck._id}}/downvote" value="Downvote" />
+            {{/if}}
         </form>
     </div>
     {{/if}}
