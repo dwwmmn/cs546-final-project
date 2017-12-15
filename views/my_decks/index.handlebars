@@ -1,4 +1,7 @@
 <section id="my_decks">
+    {{#if message}}
+    <p>{{message}}</p>
+    {{/if}}
     <ol>
         {{#each decks}}
             <li>
