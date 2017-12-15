@@ -21,7 +21,7 @@
                         <form class="addToDeckQuery" method="POST">
                             <legend>Add card to a deck.</legend>
                             <input type="hidden" name="cardToAdd" value="{{this._id}}" />
-                            <select>
+                            <select name="deckToAdd">
                                 {{#each ../myDecks}}
                                     <option value="{{this._id}}">{{this.name}}</option>
                                 {{/each}}
