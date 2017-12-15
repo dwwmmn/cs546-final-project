@@ -2,7 +2,7 @@
     <ol>
         {{#each deck}}
             <li>
-                <artcile class="deck_article">
+                <article class="deck_article">
                     <h2 class="deck_name"><a href="decks/{{this._id}}">{{this.name}}</h2>
                     <dl>
                         <dt>Description: </dt>
@@ -12,9 +12,9 @@
                         <!-- TODO: PUBLISH/UNPUBLISH -->
                     </dl>
                     
-                </artcile>
+                </article>
             </li>
         {{/each}}
     </ol>
-    <a href="/decks/create/" value="Create a Deck" />
+    <a href="/decks/create/">Create Your Own Deck! :) (SAVE ME)</a>
 </section>
