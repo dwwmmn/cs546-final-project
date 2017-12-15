@@ -59,6 +59,9 @@
         </form>
     </div>
     {{/if}}
+    {{#if message}}
+    <span id="message">{{message}}</span>
+    {{/if}}
     {{#if error}}
     <span id="error">{{error}}</span>
     {{/if}}
