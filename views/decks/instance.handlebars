@@ -4,9 +4,9 @@
         {{#if canDelete}}
             <form id="publishForm" method="Post">
                 {{#if public}}
-                <input name="unpublish" type="submit" formaction="/decks/{{this._id}}/unpublish" value="Unpublish Deck" />
+                <input name="unpublish" type="submit" formaction="/decks/{{deck._id}}/unpublish" value="Unpublish Deck" />
                 {{else}}
-                <input name="publish" type="submit" formaction="/decks/{{this._id}}/publish" value="Publish Deck" />
+                <input name="publish" type="submit" formaction="/decks/{{deck._id}}/publish" value="Publish Deck" />
                 {{/if}}
             </form>
         {{/if}}
