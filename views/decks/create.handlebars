@@ -1,0 +1,13 @@
+<section>
+    <h2>Create a Deck</h2>
+    <form method="POST">
+        <label for="name">Deck Name: </label>
+        <input type="text" name="name" id="name" />
+        <label for="description">Deck Description: </label>
+        <input type="textarea" name="description" id="description" />
+        <input type="submit" value="(: Create Deck! :)" />
+    </form>
+    {{#if message}}
+        <p>{{message}}</p>
+    {{/if}}
+</section>

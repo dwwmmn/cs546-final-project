@@ -142,6 +142,12 @@ app.get('/decks_instance/', (req, res) => {
     res.render("decks/instance", deck_obj);
 });
 
+//Test Deck Instance
+app.get('/create_deck/', (req, res) => {
+    res.render("decks/create", {});
+});
+
+
 app.listen(3000, () => {
     console.log("We've now got a server!");
     console.log("Your routes will be running on http://localhost:3000");
