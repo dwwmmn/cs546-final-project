@@ -1,6 +1,6 @@
 <section id="my_decks">
     {{#if message}}
-    <p>{{message}}</p>
+    <p id="message">{{message}}</p>
     {{/if}}
     <ol>
         {{#each decks}}
@@ -12,10 +12,9 @@
                         <dd><span class="deck_description">{{this.description}}</span></dd>
                         <dt>Rating: </dt>
                         <dd>{{this.rating}}</dd>
-                        <!-- TODO: PUBLISH/UNPUBLISH -->
                     </dl>
 
-                    <form method="Post">
+                    <form id="deleteForm" method="Post">
                         <input name="deleteDeck" type="submit" formaction="/decks/{{this._id}}/delete" value="Delete Deck" />
                     </form>
                 </article>

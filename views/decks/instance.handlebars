@@ -1,6 +1,15 @@
 <section>
     <div id="deckTitle">
         <h2>{{deck.name}}</h2>
+        {{#if canDelete}}
+            <form id="publishForm" method="Post">
+                {{#if public}}
+                <input name="unpublish" type="submit" formaction="/decks/{{this._id}}/unpublish" value="Unpublish Deck" />
+                {{else}}
+                <input name="publish" type="submit" formaction="/decks/{{this._id}}/publish" value="Publish Deck" />
+                {{/if}}
+            </form>
+        {{/if}}
         <dl>
             <dt>Owner: </dt>
             <dd>{{deck.ownerName}}</dd>
