@@ -57,6 +57,7 @@ const exampleCards = [
         _id: "6a30812d-c25b-458c-a3ff-2df67bd35d2d",
         name: "ExampleCard1",
         effect: "This is an example effect.",
+        image: "/public/res/cards/ExampleCard1.png",
         cost: 1,
         power: 4,
         rarity: 0.5
@@ -65,6 +66,8 @@ const exampleCards = [
         _id: "c3f3aa1b-555c-4975-8c19-3a8c24b324c0",
         name: "ExampleCard2",
         effect: "This is an example effect.",
+        image: "/public/res/cards/ExampleCard2.png",
+        cost: 1,
         cost: 2,
         power: 4,
         rarity: 0.5
@@ -73,6 +76,7 @@ const exampleCards = [
         _id: "0afff847-4ede-454d-ab41-c094d3ca31d4",
         name: "ExampleCard3",
         effect: "This is an example effect.",
+        image: "/public/res/cards/ExampleCard3.png",
         cost: 3,
         power: 3,
         rarity: 0.5
@@ -81,6 +85,7 @@ const exampleCards = [
         _id: "18954f72-4a7f-486a-8738-cf957ae2d904",
         name: "ExampleCard4",
         effect: "This is an example effect.",
+        image: "/public/res/cards/ExampleCard4.png",
         cost: 4,
         power: 4,
         rarity: 0.5
@@ -89,10 +94,51 @@ const exampleCards = [
         _id: "56131d89-44a8-46d9-914c-af06a5ab4f58",
         name: "ExampleCard5",
         effect: "This is an example effect.",
+        image: "/public/res/cards/ExampleCard5.png",
         cost: 4,
         power: 5,
         rarity: 0.5
-    }
+    },
+    {
+        name: "Left arm of the chosen one",
+        effect: "Memes",
+        image: "/public/res/cards/leftarm.png",
+        cost: 1,
+        power: 4,
+        rarity: 0.9
+    },
+    {
+        name: "Right arm of the chosen one",
+        effect: "Memes",
+        image: "/public/res/cards/rightarm.png",
+        cost: 102,
+        power: 150,
+        rarity: 0.9
+    },
+    {
+        name: "Head of the chosen one",
+        effect: "This is an example effect.",
+        image: "/public/res/cards/head.png",
+        cost: 800,
+        power: 1000,
+        rarity: 0.9
+    },
+    {
+        name: "Torso of the chosen one",
+        effect: "This is an example effect.",
+        image: "/public/res/cards/torso.png",
+        cost: 300,
+        power: 500,
+        rarity: 0.9
+    },
+    {
+        name: "Unicycle of the chosen one",
+        effect: "This is an example effect.",
+        image: "/public/res/cards/unicycle.png",
+        cost: 800,
+        power: 1000,
+        rarity: 0.9
+    },
 ];
 
 const exampleDecks = [
@@ -321,16 +367,19 @@ const exampleDecks = [
     }
     
     /* Dumb test code */
-    let result1 = await cards.getCards();
-    for (let i = 0; i < result1.length; i++) {
-        console.log(result1[i]);
-    }
+    //let result1 = await cards.getCards();
+    //for (let i = 0; i < result1.length; i++) {
+        //console.log(result1[i]);
+    //}
     
 
     let result2 = await decks.getTopDecks();
     for (let i = 0; i < result2.length; i++) {
         console.log(result2[i]);
     }
+
+    let result3 = await users.getUser(exampleDecks[0].owner);
+    console.log(result3);
 
     console.log("We're done!");
 

@@ -38,6 +38,10 @@ let addCard = async (cardInfo) => {
     if(!cardInfo.rarity){
         throw "No rarity provided";
     }
+    if (!cardInfo.image) {
+        throw "No image resource provided";
+    }
+
     const insertedCard = await cards.insertOne(cardInfo);
     if(insertedCard.insertedCount === 0) throw "Could not add card";
     

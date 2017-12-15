@@ -3,12 +3,17 @@ const router = express.Router();
 const db = require("../db/");
 const users = db.users;
 const cards = db.cards;
+const decks = db.decks;
 
 router.get("/", async(req, res) => {
     try {
         let results = {};
         let cardList = await cards.getCards();
         let pageNum = 1;
+
+        let msg = req.flash('message')[0]
+
+        results.message = msg;
 
         results.cards = cardList.slice((pageNum - 1)*10 , (pageNum)*10);
         results.pageNumber = pageNum;
@@ -19,7 +24,9 @@ router.get("/", async(req, res) => {
 
         if (req.user) {
             let user = await users.getUser(req.user._id);
+            let myDecks = await decks.getDecksByOwner(user._id);
             results.username = user.username;
+            results.myDecks = myDecks;
         }
 
         res.render("cards/index", results);
@@ -33,17 +40,19 @@ router.get("/:cardId", async(req, res) => {
         let results = {};
         let card = await cards.getCard(req.params.cardId);
         results["card"] = card;
-        console.log(results);
 
         if (req.user) {
             let user = await users.getUser(req.user._id);
-            results["username"] = user.username;
+            let myDecks = await decks.getDecksByOwner(user._id);
+            results.username = user.username;
+            results.myDecks = myDecks;
         }
 
 
         res.render("cards/instance", results);
 
     } catch (err) {
+        console.log(err);
         res.status(404).json({message: "Something went wrong"});
     }
 });
@@ -61,7 +70,9 @@ router.post("/search", async(req, res) => {
 
         if (req.user) {
             let user = await users.getUser(req.user._id);
+            let myDecks = await decks.getDecksByOwner(user._id);
             results.username = user.username;
+            results.myDecks = myDecks;
         }
 
         res.render("cards/index", results);
@@ -87,7 +98,9 @@ router.post("/next", async(req, res) => {
 
         if (req.user) {
             let user = await users.getUser(req.user._id);
-            results["username"] = user.username;
+            let myDecks = await decks.getDecksByOwner(user._id);
+            results.username = user.username;
+            results.myDecks = myDecks;
         }
 
         res.render("cards/index", results);
@@ -111,7 +124,9 @@ router.post("/prev", async(req, res) => {
 
         if (req.user) {
             let user = await users.getUser(req.user._id);
-            results["username"] = user.username;
+            let myDecks = await decks.getDecksByOwner(user._id);
+            results.username = user.username;
+            results.myDecks = myDecks;
         }
 
         res.render("cards/index", results);
@@ -136,7 +151,9 @@ router.post("/goto", async(req, res) => {
 
         if (req.user) {
             let user = await users.getUser(req.user._id);
-            results["username"] = user.username;
+            let myDecks = await decks.getDecksByOwner(user._id);
+            results.username = user.username;
+            results.myDecks = myDecks;
         }
 
         res.render("cards/index", results);
@@ -144,5 +161,28 @@ router.post("/goto", async(req, res) => {
         res.status(404).json({message: "Something went wrong"});
     }
 
+});
+
+router.post("/add/:cardId", async(req, res) => {
+    try {
+        let results = {};
+
+        if (req.user) {
+            let cardId = req.params.cardId;
+            await decks.insertCard(req.body.deckToAdd, cardId);
+
+            let card = await cards.getCard(cardId);
+            let deck = await decks.getDeck(req.body.deckToAdd);
+
+            req.flash('message', card.name + ' added to ' + deck.name);
+            res.redirect("/cards");
+        } else {
+            res.redirect("/login");
+        }
+
+    } catch (err) {
+        console.log(err);
+        res.status(404).json({message: "Something went wrong"});
+    }
 });
 module.exports = router;

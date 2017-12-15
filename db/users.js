@@ -38,7 +38,9 @@ let addUser = async (userinfo) => {
     if (!userinfo.email) {
         throw "Email cannot be blank";
     }
-    userinfo._id = uuid();
+    if (!userinfo._id) {
+        userinfo._id = uuid();
+    }
 
 
 
