@@ -1,5 +1,6 @@
 <section>
     <h2 value="Card Name">{{card.name}}</h2>
+    <img src="{{card.image}}" />
     <dl>
         <dt>Effect: </dt>
         <dd>{{card.effect}}</dd>
@@ -14,12 +15,14 @@
     {{#if myDecks}}
         <span>
             <form class="addToDeckQuery" method="POST">
+                <legend>Add this card to one of your decks!</legend>
                 <select>
                     {{#each myDecks}}
                         <option value="{{this._id}}">{{this.name}}</option>
                     {{/each}}
                 </select>
-            </form>>
+                <input name="addToDeck" type="submit" formaction="/cards/add/{{this._id}}" value="Add to Deck" />
+            </form>
         </span>
     {{/if}}
 </section>
