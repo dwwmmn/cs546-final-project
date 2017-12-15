@@ -17,6 +17,11 @@
                 <span id="card">
                     <a href="/cards/{{this._id}}/">{{this.name}}</a>    
                 </span>
+                {{#if canDelete}}
+                <form method="POST" class="deleteCard">
+                    <input name="deleteCard" type="submit" formaction="/decks/{{../deck._id}}/delete" value="{{this._id}}" />
+                </form>
+                {{/if}}
             </li>
         {{/each}}
         </ol>
