@@ -26,6 +26,13 @@
         {{/each}}
         </ol>
     </div>
+    {{#if canDelete}}
+    <div>
+        <form method="Post">
+            <input name="deleteDeck" type="submit" formaction="/decks/{{this._id}}/delete" value="Delete Deck" />
+        </form>
+    </div>
+    {{/if}}
     {{#if username}}
     <div id="votes">
         <form id="voteForm" method="POST">
