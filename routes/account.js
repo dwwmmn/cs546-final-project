@@ -29,10 +29,13 @@ router.get("/decks", async(req, res) => {
     try {
         let results = {};
 
+        let msg = req.flash('message')[0];
+        results.message = msg;
+
 
         if (req.user) {
             let user = await users.getUser(req.user._id);
-            let deckList = await decks.getDecksByOwner(req.user._id);
+            let deckList = await decks.getDecksByOwner(req.user._id, false);
 
             results.username = user.username;
             results.decks = deckList;

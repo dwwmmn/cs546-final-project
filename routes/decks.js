@@ -8,7 +8,7 @@ const cards = db.cards;
 router.get("/", async(req, res) => {
     try {
         let results = {};
-        let deckList = await decks.getDecks();
+        let deckList = await decks.getDecks(true);
         let pageNum = 1;
 
         results.decks = deckList.slice((pageNum - 1)*10 , (pageNum)*10);
@@ -53,11 +53,14 @@ router.get("/:deckId", async(req, res) => {
     try {
         let results = {};
         let deck = await decks.getDeck(req.params.deckId);
-        let msg = req.flash("error")[0];
+        let errorMsg = req.flash("error")[0];
+        let msg = req.flash("message")[0];
 
-        results.error = msg;
+        results.message = msg;
 
+        results.error = errorMsg;
         results.deck = deck;
+
 
         if (req.user) {
             let user = await users.getUser(req.user._id);
@@ -73,6 +76,12 @@ router.get("/:deckId", async(req, res) => {
 
             if (user._id == deck.owner) {
                 results.canDelete = true;
+                results.public = deck.isPublic;
+            }
+
+            if (user._id != deck.owner && !deck.isPublic) {
+                results.deck = null;
+                results.public = null;
             }
 
             results.username = user.username;
@@ -90,7 +99,7 @@ router.post("/search", async(req, res) => {
     try {
         let results = {};
 
-        let deckList = await decks.getDecksByName(req.body.name);
+        let deckList = await decks.getDecksByName(req.body.name, true);
 
         results.searchName = req.body.name;
         results.pageNumber = 1;
@@ -112,7 +121,7 @@ router.post("/search", async(req, res) => {
 router.post("/next", async(req, res) => {
     try {
         let results = {};
-        let deckList = await (req.body.search? decks.getDecksByName(req.body.search): decks.getDecks());
+        let deckList = await (req.body.search? decks.getDecksByName(req.body.search): decks.getDecks(true));
         let pageNum = Math.max(1, Math.min(req.body.pageNumber + 1, Math.ceil(deckList.length/10)));
 
         results["decks"] = deckList.slice((pageNum - 1)*10 , (pageNum)*10);
@@ -137,7 +146,7 @@ router.post("/next", async(req, res) => {
 router.post("/prev", async(req, res) => {
     try {
         let results = {};
-        let deckList = await (req.body.search? decks.getDecksByName(req.body.search): decks.getDecks());
+        let deckList = await (req.body.search? decks.getDecksByName(req.body.search): decks.getDecks(true));
         let pageNum = Math.max(1, Math.min(req.body.pageNumber - 1, Math.ceil(deckList.length/10)));
 
         results["decks"] = deckList.slice((pageNum - 1)*10 , (pageNum)*10);
@@ -162,7 +171,7 @@ router.post("/prev", async(req, res) => {
 router.post("/goto", async(req, res) => {
     try {
         let results = {};
-        let deckList = await (req.body.search? decks.getDecksByName(req.body.search): decks.getDecks());
+        let deckList = await (req.body.search? decks.getDecksByName(req.body.search): decks.getDecks(true));
         let pageNum = Math.max(1, Math.min(req.body.pageNumber, Math.ceil(deckList.length/10)));
 
         results["decks"] = deckList.slice((pageNum - 1)*10 , (pageNum)*10);
@@ -239,7 +248,8 @@ router.post("/:deckId/delete/:cardId", async(req, res) => {
 router.post("/:deckId/upvote", async(req, res) => {
     try {
         let deckId = req.params.deckId;
-        if (req.user) {
+        let deck = await decks.getDeck(req.params.deckId);
+        if (req.user && deck.isPublic) {
             let user = await users.getUser(req.user._id);
             await decks.upvote(deckId, user._id);
 
@@ -257,7 +267,9 @@ router.post("/:deckId/upvote", async(req, res) => {
 router.post("/:deckId/downvote", async(req, res) => {
     try {
         let deckId = req.params.deckId;
-        if (req.user) {
+        let deck = await decks.getDeck(req.params.deckId);
+
+        if (req.user && deck.isPublic) {
             let user = await users.getUser(req.user._id);
             await decks.downvote(deckId, user._id);
 
@@ -275,7 +287,9 @@ router.post("/:deckId/downvote", async(req, res) => {
 router.post("/:deckId/removeUpvote", async(req, res) => {
     try {
         let deckId = req.params.deckId;
-        if (req.user) {
+        let deck = await decks.getDeck(req.params.deckId);
+
+        if (req.user && deck.isPublic) {
             let user = await users.getUser(req.user._id);
             await decks.removeUpvote(deckId, user._id);
 
@@ -293,7 +307,9 @@ router.post("/:deckId/removeUpvote", async(req, res) => {
 router.post("/:deckId/removeDownvote", async(req, res) => {
     try {
         let deckId = req.params.deckId;
-        if (req.user) {
+        let deck = await decks.getDeck(req.params.deckId);
+
+        if (req.user && deck.isPublic) {
             let user = await users.getUser(req.user._id);
             await decks.removeDownvote(deckId, user._id);
 
@@ -308,4 +324,81 @@ router.post("/:deckId/removeDownvote", async(req, res) => {
     }
 });
 
+router.post("/:deckId/delete", async(req, res) => {
+    try {
+        if (req.user) {
+            let user = await users.getUser(req.user._id);
+            let deck = await decks.getDeck(req.params.deckId);
+
+            if (user._id == deck.owner) {
+                await decks.deleteDeck(deck._id);
+
+                req.flash('message', deck.name + " deleted");
+                res.redirect("/account/decks");
+
+            } else {
+                req.flash("error", "You can't do that!");
+                res.redirect("/decks/" + deck._id);
+            }
+
+        } else {
+            req.flash("error", "You must log in to do that");
+            res.redirect("/decks/" + deckId);
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({message: "Something went wrong"});
+    }
+});
+
+router.post("/:deckId/publish", async(req, res) => {
+    try {
+
+        if (req.user) {
+            let user = await users.getUser(req.user._id);
+            let deck = await decks.getDeck(req.params.deckId);
+
+            if (user._id == deck.owner) {
+                await decks.publish(deck._id);
+                req.flash('message', deck.name + " published");
+                res.redirect("/decks/" + deck._id);
+            } else {
+                req.flash("error", "You can't do that!");
+                res.redirect("/decks/" + deck._id);
+            }
+        } else {
+            req.flash("error", "You must log in to do that");
+            res.redirect("/decks/" + deckId);
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({message: "Something went wrong"});
+    }
+});
+
+router.post("/:deckId/unPublish", async(req, res) => {
+    try {
+        
+        if (req.user) {
+            let user = await users.getUser(req.user._id);
+            let deck = await decks.getDeck(req.params.deckId);
+
+            if (user._id == deck.owner) {
+                await decks.unPublish(deck._id);
+                req.flash('message', deck.name + " unpublished");
+                res.redirect("/decks/" + deck._id);
+            } else {
+
+                req.flash("error", "You can't do that!");
+                res.redirect("/decks/" + deck._id);
+            }
+        } else {
+            req.flash("error", "You must log in to do that");
+            res.redirect("/decks/" + deckId);
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({message: "Something went wrong"});
+    }
+});
 module.exports = router;

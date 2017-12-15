@@ -20,7 +20,6 @@ let sortFn = (a, b) => {
     }
 }
 
-
 let getDeck = async (deckId) => {
     if(!deckId) throw "No deck ID specified";
     let deckC = await deckCollection();
@@ -43,10 +42,15 @@ let getDeck = async (deckId) => {
     return deck;
 }
 
-let getDecks = async () => {
+let getDecks = async (publicOnly) => {
     let deckC = await deckCollection();
+    let decks = [];
 
-    let decks = await deckC.find({}).toArray();
+    if (publicOnly) {
+        decks = await deckC.find({ isPublic: true}).toArray();
+    } else {
+        decks = await deckC.find({}).toArray();
+    }
     decks.sort(sortFn);
 
     for (let i = 0; i < decks.length; ++i) {
@@ -57,11 +61,17 @@ let getDecks = async () => {
     return decks;
 }
 
-let getDecksByName = async (queryName) => {
+let getDecksByName = async (queryName, publicOnly) => {
     let deckC = await deckCollection();
     queryName = ".*" + queryName + ".*";
 
-    let decks = await deckC.find( { name: {$regex: queryName }}).toArray();
+    let decks = [];
+
+    if (publicOnly) {
+        decks = await deckC.find( { isPublic: true, name: {$regex: queryName }}).toArray();
+    } else {
+        decks = await deckC.find( {name: {$regex: queryName }}).toArray();
+    }
 
     decks.sort(sortFn);
 
@@ -75,7 +85,7 @@ let getDecksByName = async (queryName) => {
 
 let getTopDecks = async (id, info) => {
     let deckC = await deckCollection();
-    const decks = await deckC.find({}).toArray();
+    const decks = await deckC.find({ isPublic: true }).toArray();
 
     decks.sort(sortFn);
 
@@ -104,6 +114,24 @@ let updateDeck = async (id, info) => {
     
     return ret;
 
+}
+
+let publish = async (id) => {
+    let decks = await deckCollection();
+
+    let updatedDeck = await decks.updateOne({ _id: id}, { $set: { isPublic: true} });
+    if(updatedDeck.modifiedCount === 0) throw "Could not publish deck";
+
+    return getDeck(id);
+}
+
+let unPublish = async (id) => {
+    let decks = await deckCollection();
+
+    let updatedDeck = await decks.updateOne({ _id: id}, { $set: { isPublic: false} });
+    if(updatedDeck.modifiedCount === 0) throw "Could not unpublish deck";
+
+    return getDeck(id);
 }
 
 let addDeck = async (deckInfo) => {
@@ -148,10 +176,16 @@ let addDeck = async (deckInfo) => {
     return deck;
 }
 
-let getDecksByOwner = async (userId) => {
+let getDecksByOwner = async (userId, publicOnly) => {
     if(!userId) throw "No user specified";
     let decks = await deckCollection();
-    const ownedDecks = decks.find({ owner: userId }).toArray();
+
+    let ownedDecks = [];
+    if (publicOnly) {
+        ownedDecks = decks.find({ owner: userId, isPublic: true }).toArray();
+    } else {
+        ownedDecks = decks.find({ owner: userId}).toArray();
+    }
 
     if(ownedDecks === null) throw "This user does not own any decks";
     return ownedDecks;
@@ -288,4 +322,6 @@ module.exports = {
     removeCard: removeCard,
     clearAll: clearAll,
     getTopDecks: getTopDecks,
+    publish: publish,
+    unPublish: unPublish
 }
