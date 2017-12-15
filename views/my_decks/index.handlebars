@@ -11,6 +11,10 @@
                         <dd>{{this.rating}}</dd>
                         <!-- TODO: PUBLISH/UNPUBLISH -->
                     </dl>
+
+                    <form method="Post">
+                        <input name="deleteDeck" type="submit" formaction="/decks/{{this._id}}/delete" value="Delete Deck" />
+                    </form>
                 </article>
             </li>
         {{/each}}
