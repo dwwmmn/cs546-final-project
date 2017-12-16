@@ -1,6 +1,9 @@
 <section id="signupSection">
     {{#if message}}
-    <span id="error">{{message}}</span>
+    <span id="message">{{message}}</span>
+    {{/if}}
+    {{#if error}}
+    <span id="error">{{error}}</span>
     {{/if}}
     <form method="POST">
         <div id="username_block">

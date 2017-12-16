@@ -5,16 +5,10 @@ const db = require("../db/");
 const users = db.users;
 
 router.get("/", (req, res) => {
-    let msg = "";
+    let msg = req.flash('message')[0];
+    let err = req.flash('error')[0];
 
-    if (req.flash('error')) {
-        msg = req.flash('error')[0];
-        res.render("signup/index", { error: msg });
-    } else {
-        msg = req.flash('message')[0];
-        res.render("signup/index", { message: msg });
-    }
-
+    res.render('signup/index', {message: msg, error: err})
 });
 
 router.post("/", async(req, res) => {
