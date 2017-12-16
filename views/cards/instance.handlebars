@@ -1,6 +1,6 @@
 <section id="card_instance">
-    <h2 value="Card Name">{{card.name}}</h2>
-    <img src="{{card.image}}" />
+    <h2>{{card.name}}</h2>
+    <img src="{{card.image}}" alt="{{card.name}} Visual Image used In Game" />
     <dl>
         <dt>Effect: </dt>
         <dd>{{card.effect}}</dd>
@@ -13,9 +13,9 @@
     </dl>
 
     {{#if myDecks}}
-        <span>
+        <div>
             <form class="addToDeckQuery" method="POST">
-                <legend>Add this card to one of your decks!</legend>
+                <p>Add this card to one of your decks!</p>
                 <select>
                     {{#each myDecks}}
                         <option value="{{this._id}}">{{this.name}}</option>
@@ -23,6 +23,6 @@
                 </select>
                 <input name="addToDeck" type="submit" formaction="/cards/add/{{this._id}}" value="Add to Deck" />
             </form>
-        </span>
+        </div>
     {{/if}}
 </section>
