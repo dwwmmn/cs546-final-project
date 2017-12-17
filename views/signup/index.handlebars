@@ -5,30 +5,35 @@
     {{#if error}}
     <span id="error">{{error}}</span>
     {{/if}}
-    <form method="POST">
+    <form method="POST" id="signupForm">
         <div id="username_block">
             <label for="username">Username: </label>
-            <input id="username" name="username" placeholder="Enter a Username" type="text" />
+            <input id="username" name="username" placeholder="Enter a Username" type="text"
+            required="required" pattern="[a-zA-Z0-9]+" minlength="3" maxlength="12"/>
         </div>
         <div id="fullname_block">
             <label for="fullname">Full Name: </label>
-            <input id="fullname" name="fullname" placeholder="Enter your full name" type="text" />
+            <input id="fullname" name="fullname" placeholder="Enter your full name" type="text" 
+                required="required" pattern="[a-zA-Z0-9 -]+" minlength="3" maxlength="12"/>
         </div>
         <div id="password_block">
             <label for="password">Password: </label>
-            <input id="password" name="password" placeholder="Enter a password" type="password" />
+            <input id="password" name="password" placeholder="Enter a password" type="password" 
+                required="required" pattern="[a-zA-Z0-9!@#$%]+" minlength="6" maxlength="12" />
         </div>
         <div id="repeatPassword_block">
             <label for="repeatPassword">Repeat Password: </label>
-            <input id="repeatPassword" name="repeatPassword" placeholder="Repeat password" type="password" />
+            <input id="repeatPassword" name="repeatPassword" placeholder="Repeat password" type="password"
+                required="required" pattern="[a-zA-Z0-9!@#$%]+" minlength="6" maxlength="12" />
         </div>
         <div id="about_block">
             <label for="about">About: </label>
-            <input id="about" name="about" placeholder="Describe Yourself" type="text" />
+            <input id="about" name="about" placeholder="Describe Yourself" type="text"
+                required="required" maxlength="144"/>
         </div>
         <div id="email_block">
             <label for="email">Email: </label>
-            <input id="email" name="email" placeholder="Email" type="email" />
+            <input id="email" name="email" placeholder="Email" type="email" required="requried" />
         </div>
         <input id="submit" type="submit" />
     </form>

@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
     let msg = req.flash('message')[0];
     let err = req.flash('error')[0];
 
-    res.render('signup/index', {message: msg, error: err})
+    res.render('signup/index', {message: msg, error: err, script: "/public/js/signup_validation.js"});
 });
 
 router.post("/", async(req, res) => {
