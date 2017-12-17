@@ -1,0 +1,106 @@
+html * {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+#title {
+    text-align: center;
+    clear: right;
+    font-size: 14px;
+}
+
+#login_div {
+    visibility: hidden;
+    float: right;
+    font-size: 8px;
+    padding-right: 30px;
+}
+
+#deckTitle dl {
+    font-size: 12px;
+    padding-left: 10px;
+}
+
+#top_decks {
+    font-size: 12px;
+}
+
+#top_decks a {
+    font-size: 16px;
+}
+
+#decks {
+    font-size:10px;
+}
+
+div p {
+    font-size: 12px;
+}
+
+a:visited, a:link{
+    text-decoration: none;
+}
+
+#site_links {
+    font-size: 14px;
+    font-style: normal;
+    text-align: center;
+}
+
+#site_links li {
+    display: inline-block;
+    text-align: center;
+    vertical-align: text-top;
+}
+
+li {
+    list-style-type: none;
+}
+
+#search p{
+    visibility: hidden;
+    font-size: 8px;
+}
+
+input {
+    font-size: 12px;
+}
+
+label {
+    font-size: 8px;
+    padding-left: 8px;
+}
+
+#my_decks {
+    font-size: 12px;
+    padding-left: 10px;
+}
+
+#card_instance {
+    padding-left: 15px;
+}
+
+#card_instance dl dt {
+    font-size: 14px;
+}
+
+#card_instance dl dd {
+    font-size: 14px;
+}
+
+
+#create_link {
+    padding-left: 10px;
+}
+
+#page_navigation {
+    visibility: hidden;
+}
+
+.card {
+    font-size: 14px;
+    padding-top: 12px;
+}
+
+.deck {
+    font-size: 10px;
+}
