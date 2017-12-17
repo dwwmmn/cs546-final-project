@@ -2,6 +2,11 @@ html * {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
+img {
+    height: 200px;
+    width: 400px;
+}
+
 #title {
     text-align: center;
     clear: right;
